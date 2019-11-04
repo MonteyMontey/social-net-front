@@ -108,11 +108,11 @@ export default function Main() {
 
 const styles = {
   form: {
-    paddingTop: "30px",
-    paddingBottom: "50px"
+    paddingTop: "20px",
+    paddingBottom: "40px"
   },
   registration: {
-    paddingTop: "100px",
-    paddingBottom: "250px"
+    paddingTop: "50px",
+    paddingBottom: "40px"
   }
 };
