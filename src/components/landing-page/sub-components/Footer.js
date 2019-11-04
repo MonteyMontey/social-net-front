@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div>
        <Container>
-        <div style={{marginTop: '10px', display: 'flex', justifyContent: 'space-between'}}>
+        <div style={{marginTop: '20px', display: 'flex', justifyContent: 'space-between'}}>
           <a href="#">Register</a>
           <a href="#">Login</a>
           <a href="#">Contact</a>
@@ -16,7 +16,7 @@ export default function Footer() {
           <a href="#">Career</a>
           <a href="#">Help</a>
         </div>
-        <p style={{marginTop: "50px", fontSize: "14px", textAlign: "center"}}>
+        <p style={{marginTop: "35px", fontSize: "14px", textAlign: "center"}}>
           Social-Network © 2019
         </p>
       </Container>
