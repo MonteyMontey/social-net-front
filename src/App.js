@@ -1,6 +1,7 @@
 import React from 'react';
 import LandingPage from './components/landing-page/LandingPage';
 
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,7 +15,7 @@ function App() {
       <Switch>
 
         <Route path="/" exact>
-          <LandingPage/>
+          <LandingPage />
         </Route>
 
       </Switch>

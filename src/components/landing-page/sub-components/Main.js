@@ -1,103 +1,82 @@
 import React from "react";
 import { Container, Form, Button, Col } from "react-bootstrap";
 
-export default function Main() {
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+export default function Main(props) {
+
   return (
     <div style={{ backgroundColor: "#e9ebee", height: "100%", width: "100%" }}>
       <Container>
         <div style={styles.registration}>
-          <h3 style={{color: "#343a40"}}>Create an account</h3>
+          <h3 style={{ color: "#343a40" }}>Create an account</h3>
           <Form style={styles.form}>
+
             <Form.Row>
               <Form.Group as={Col} controlId="formGridFirstName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" placeholder="Max" />
+                <Form.Control type="text" placeholder="First Name" />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridLastName">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" placeholder="Mustermann"/>
-              </Form.Group>
-            </Form.Row>
-
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridCity">
-                <Form.Label>City</Form.Label>
-                <Form.Control type="text" placeholder="Berlin"/>
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>State</Form.Label>
-                <Form.Control type="text" placeholder="Berlin"/>
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridZip">
-                <Form.Label>Zip</Form.Label>
-                <Form.Control type="number" placeholder="12681"/>
+                <Form.Control type="text" placeholder="Last Name" />
               </Form.Group>
             </Form.Row>
 
             <Form.Row>
               <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="max.mustermann@gmail.com"/>
+                <Form.Control style={{ width: "50%" }} type="email" placeholder="Email" />
+              </Form.Group>
+            </Form.Row>
+
+            <Form.Row>
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Control type="password" placeholder="Password" />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" />
+                <Form.Control type="password" placeholder="Repeat password" />
               </Form.Group>
             </Form.Row>
 
-            <h5 style={{marginBottom: '20px', marginTop: '10px', color: "#343a40"}}>Birthday</h5>
+            <h5 style={{ marginBottom: '20px', marginTop: '10px', color: "#343a40" }}>Birthday</h5>
 
             <Form.Row>
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Control as="select">
-                  <option>Day...</option>
-                  <option>1</option>
-                </Form.Control>
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Control as="select">
-                  <option>Month...</option>
-                  <option>...</option>
-                </Form.Control>
-              </Form.Group>
-              
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Control as="select">
-                  <option>Year...</option>
-                  <option>...</option>
-                </Form.Control>
-              </Form.Group>
+              <DatePicker selected={props.date} onChange={props.setDate} />
             </Form.Row>
 
-            <div style={{marginTop: "10px"}} key={'inline-radio'} className="mb-3">
-              <Form.Check
-                inline
-                label="Male"
-                type='radio'
-                id={"inline-radio-1"}
-              />
-              <Form.Check
-                inline
-                label="Female"
-                type='radio'
-                id={"inline-radio-2"}
-              />
-              <Form.Check
-                inline
-                label="Other"
-                type='radio'
-                id={"inline-radio-3"}
-              />
-            </div>
+            <Form.Row>
+              <div style={{ margin: "30px 0 0 0" }} key={'inline-radio'} className="mb-3">
+                <Form.Check
+                  checked={props.gender === "Male"}
+                  onChange={() => props.setGender("Male")}
+                  inline
+                  label="Male"
+                  type='radio'
+                  id={"inline-radio-1"}
+                />
+                <Form.Check
+                  checked={props.gender === "Female"}
+                  onChange={() => props.setGender("Female")}
+                  inline
+                  label="Female"
+                  type='radio'
+                  id={"inline-radio-2"}
+                />
+                <Form.Check
+                  checked={props.gender === "Other"}
+                  onChange={() => props.setGender("Other")}
+                  inline
+                  label="Other"
+                  type='radio'
+                  id={"inline-radio-3"}
+                />
+              </div>
+            </Form.Row>
 
-            <Button size="lg" style={{marginTop: "20px"}} variant="primary" type="submit">
-              Register
-            </Button>
+
+            <Button size="lg" style={{ marginTop: "25px" }} variant="primary" type="submit">Register</Button>
+
 
           </Form>
         </div>
@@ -113,6 +92,6 @@ const styles = {
   },
   registration: {
     paddingTop: "50px",
-    paddingBottom: "40px"
+    paddingBottom: "200px"
   }
 };
