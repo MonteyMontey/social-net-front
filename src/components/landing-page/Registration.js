@@ -8,22 +8,33 @@ class Registration extends React.Component {
   state = {
     date: new Date("August 3, 1997"),
     gender: "Male",
-    showPasswordsDontMatchWarning: false
+    showPasswordsDontMatchAlert: false,
+    showNoServerConnectionAlert: false
   };
 
-  PasswordsDontMatchWarning = () => {
+  PasswordsDontMatchAlert = () => {
     return (
       <Alert dismissible
-        onClose={() => this.setState({ showPasswordsDontMatchWarning: false })}
+        onClose={() => this.setState({ showPasswordsDontMatchAlert: false })}
         variant="danger">
         Your passwords don't match!
       </Alert>
     )
   }
 
+  NoServerConnectionAlert = () => {
+    return (
+      <Alert dismissible
+        onClose={() => this.setState({ showNoServerConnectionAlert: false })}
+        variant="danger">
+        No connection to NodeJs backend!
+      </Alert>
+    )
+  }
+
   submitRegistration = e => {
     if (e.target.formGridPassword.value !== e.target.formGridRepeatPassword.value) {
-      this.setState({ showPasswordsDontMatchWarning: true });
+      this.setState({ showPasswordsDontMatchAlert: true });
     } else {
 
       let registration = {}
@@ -36,12 +47,12 @@ class Registration extends React.Component {
 
       Axios.post('/registration', registration)
         .then(res => {
-          console.log("Successfully sent registration data to backend", registration)
-          console.log(res)
+          console.log("Successfully sent registration data to backend", res)
+          /* other stuff*/
         })
-        .catch(err => {
-          console.error("Failed to send registration data to backend", err)
-        })
+        .catch(() => {
+          this.setState({ showNoServerConnectionAlert: true })
+        });
     }
     e.preventDefault()
   }
@@ -49,7 +60,8 @@ class Registration extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "#e9ebee", height: "100%", width: "100%" }}>
-        {this.state.showPasswordsDontMatchWarning ? <this.PasswordsDontMatchWarning /> : null}
+        {this.state.showNoServerConnectionAlert ? <this.NoServerConnectionAlert /> : null}
+        {this.state.showPasswordsDontMatchAlert ? <this.ShowPasswordsDontMatchAlert /> : null}
         <Container>
           <div style={styles.registration}>
             <h3 style={{ color: "#343a40" }}>Create an account</h3>
@@ -62,8 +74,8 @@ class Registration extends React.Component {
                     type="text"
                     placeholder="First Name"
                     pattern="[a-zA-Z_0-9]*"
-                    minlength="3"
-                    maxlength="20"
+                    minLength="3"
+                    maxLength="20"
                     title="[a-zA-Z_0-9]*" />
                 </Form.Group>
 
@@ -72,8 +84,8 @@ class Registration extends React.Component {
                     type="text"
                     placeholder="Last Name"
                     pattern="[a-zA-Z_0-9]*"
-                    minlength="3"
-                    maxlength="20"
+                    minLength="3"
+                    maxLength="20"
                     title="[a-zA-Z_0-9]*" />
                 </Form.Group>
               </Form.Row>
@@ -84,7 +96,7 @@ class Registration extends React.Component {
                     style={{ width: "50%" }}
                     type="email"
                     placeholder="Email"
-                    maxlength="254" />
+                    maxLength="254" />
                 </Form.Group>
               </Form.Row>
 
@@ -93,8 +105,8 @@ class Registration extends React.Component {
                   <Form.Control required
                     type="password"
                     placeholder="Password"
-                    minlength="8"
-                    maxlength="25"
+                    minLength="8"
+                    maxLength="25"
                     pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
                     title="[a-zA-Z0-9_$!%^*#/\()?]*" />
                 </Form.Group>
@@ -103,8 +115,8 @@ class Registration extends React.Component {
                   <Form.Control required
                     type="password"
                     placeholder="Repeat password"
-                    minlength="8"
-                    maxlength="25"
+                    minLength="8"
+                    maxLength="25"
                     pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
                     title="[a-zA-Z0-9_$!%^*#/\()?]*" />
                 </Form.Group>
