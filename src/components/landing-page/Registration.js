@@ -44,27 +44,27 @@ class Registration extends React.Component {
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridFirstName">
-                  <Form.Control type="text" placeholder="First Name" />
+                  <Form.Control required type="text" placeholder="First Name" />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridLastName">
-                  <Form.Control type="text" placeholder="Last Name" />
+                  <Form.Control required type="text" placeholder="Last Name" />
                 </Form.Group>
               </Form.Row>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridEmail">
-                  <Form.Control style={{ width: "50%" }} type="email" placeholder="Email" />
+                  <Form.Control required style={{ width: "50%" }} type="email" placeholder="Email" />
                 </Form.Group>
               </Form.Row>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control required type="password" placeholder="Password" />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridRepeatPassword">
-                  <Form.Control type="password" placeholder="Repeat password" />
+                  <Form.Control required type="password" placeholder="Repeat password" />
                 </Form.Group>
               </Form.Row>
 
