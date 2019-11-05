@@ -11,7 +11,7 @@ export default function Footer() {
           <a href="#">Contact</a>
           <a href="#">Cookies</a>
           <a href="#">Privacy</a>
-          <a href="https://en.wikipedia.org/wiki/Piracy">Piracy</a>
+          <a target="_blank" href="https://www.youtube.com/watch?v=-qItP8Lbr7s">Piracy</a>
           <a href="#">Service</a>
           <a href="#">Career</a>
           <a href="#">Help</a>
