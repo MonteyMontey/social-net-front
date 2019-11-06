@@ -9,7 +9,7 @@ class Registration extends React.Component {
     date: new Date("August 3, 1997"),
     gender: "Male",
     showPasswordsDontMatchAlert: false,
-    showNoServerConnectionAlert: false
+    showSomethingWentWrong: false
   };
 
   PasswordsDontMatchAlert = () => {
@@ -22,12 +22,12 @@ class Registration extends React.Component {
     )
   }
 
-  NoServerConnectionAlert = () => {
+  SomethingWentWrongAlert = () => {
     return (
       <Alert dismissible
-        onClose={() => this.setState({ showNoServerConnectionAlert: false })}
+        onClose={() => this.setState({ showSomethingWentWrong: false })}
         variant="danger">
-        No connection to NodeJs backend!
+        Oops, something went wrong! Please try again.
       </Alert>
     )
   }
@@ -48,10 +48,11 @@ class Registration extends React.Component {
       Axios.post('/registration', registration)
         .then(res => {
           console.log("Successfully sent registration data to backend", res)
-          /* other stuff*/
+          /* go on */
         })
-        .catch(() => {
-          this.setState({ showNoServerConnectionAlert: true })
+        .catch((error) => {
+          this.setState({ showSomethingWentWrong: true });
+          console.log("Something went wrong", error.response)
         });
     }
     e.preventDefault()
@@ -60,8 +61,8 @@ class Registration extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "#e9ebee", height: "100%", width: "100%" }}>
-        {this.state.showNoServerConnectionAlert ? <this.NoServerConnectionAlert /> : null}
-        {this.state.showPasswordsDontMatchAlert ? <this.ShowPasswordsDontMatchAlert /> : null}
+        {this.state.showSomethingWentWrong ? <this.SomethingWentWrongAlert /> : null}
+        {this.state.showPasswordsDontMatchAlert ? <this.PasswordsDontMatchAlert /> : null}
         <Container>
           <div style={styles.registration}>
             <h3 style={{ color: "#343a40" }}>Create an account</h3>
