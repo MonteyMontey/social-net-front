@@ -3,6 +3,8 @@ import { Container, Form, Button, Col, Alert } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Axios from 'axios';
+import { withRouter} from 'react-router-dom'
+
 
 class Registration extends React.Component {
   state = {
@@ -36,7 +38,6 @@ class Registration extends React.Component {
     if (e.target.formGridPassword.value !== e.target.formGridRepeatPassword.value) {
       this.setState({ showPasswordsDontMatchAlert: true });
     } else {
-
       let registration = {}
       registration.firstName = e.target.formGridFirstName.value
       registration.lastName = e.target.formGridLastName.value
@@ -47,15 +48,15 @@ class Registration extends React.Component {
 
       Axios.post('/registration', registration)
         .then(res => {
-          console.log("Successfully sent registration data to backend", res)
-          /* go on */
+          console.log("Successfully sent registration data to backend", res);
+          this.props.history.push('/frontpage')
         })
         .catch((error) => {
           this.setState({ showSomethingWentWrong: true });
-          console.log("Something went wrong", error.response)
+          console.log("Something went wrong", error.response);
         });
     }
-    e.preventDefault()
+    e.preventDefault();
   }
 
   render() {
@@ -182,4 +183,4 @@ const styles = {
 };
 
 
-export default Registration;
+export default withRouter(Registration);
