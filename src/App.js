@@ -1,6 +1,5 @@
 import React from 'react';
-import LandingPage from './components/landing-page/LandingPage';
-
+import LandingPage from './pages/LandingPage';
 
 import {
   BrowserRouter as Router,
