@@ -1,7 +1,6 @@
 import React from 'react';
 import LandingPage from './pages/LandingPage';
 
-
 import {
   BrowserRouter as Router,
   Switch,
