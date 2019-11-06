@@ -1,5 +1,6 @@
 import React from 'react';
 import LandingPage from './pages/LandingPage';
+import FrontPage from './pages/FrontPage';
 
 
 import {
@@ -13,11 +14,12 @@ function App() {
   return (
     <Router>
       <Switch>
-
         <Route path="/" exact>
           <LandingPage />
         </Route>
-
+        <Route path="/frontpage" exact>
+          <FrontPage />
+        </Route>
       </Switch>
     </Router>
   );
