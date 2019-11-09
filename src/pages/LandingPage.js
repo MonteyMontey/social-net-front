@@ -9,11 +9,11 @@ class LandingPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Header />
         <Registration />
         <Footer />
-      </div>
+      </React.Fragment>
     );
   }
 }

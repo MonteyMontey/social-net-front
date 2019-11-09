@@ -178,7 +178,7 @@ const styles = {
   },
   registration: {
     paddingTop: "50px",
-    paddingBottom: "130px"
+    paddingBottom: "200px"
   }
 };
 
