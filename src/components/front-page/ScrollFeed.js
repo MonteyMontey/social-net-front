@@ -14,29 +14,23 @@ class ScrollFeed extends React.Component {
 
   fetchMorePosts = () => {
     Axios.get('/posts')
-        .then(res => {
-          console.log("Successfully fetched posts data from backend", res);
-          this.setState({
-            posts: this.state.posts.concat(res.data[0].body)
-          });
-        })
-        .catch((error) => {
-          console.log("Couldn't fetch post data from backend", error.response);
+      .then(res => {
+        console.log("Successfully fetched posts data from backend", res);
+        this.setState({
+          posts: this.state.posts.concat(res.data[0].body)
         });
-
-    /* setTimeout(() => {
-      this.setState({
-        posts: this.state.posts.concat(["new Post", "new Post", "new Post", "new Post", "new Post"])
+      })
+      .catch((error) => {
+        console.log("Couldn't fetch post data from backend", error.response);
       });
-    }, 1500); */
   }
 
   render() {
     return (
       <React.Fragment>
-        <Container style={{width: "900px"}}>
+        <Container style={{ width: "900px" }}>
           <InfiniteScroll
-            style={{scrollbarWidth: "none"}} // only implemented for firefox right now
+            style={{ scrollbarWidth: "none" }} // only implemented for firefox right now
             height="800px"
             dataLength={this.state.posts.length}
             next={this.fetchMorePosts}

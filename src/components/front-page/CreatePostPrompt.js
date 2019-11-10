@@ -10,7 +10,7 @@ class CreatePostPrompt extends React.Component {
     post.user = "PLACEHOLDER_USER_ID";
     post.body = e.target.post.value;
 
-    Axios.post('/post', post)
+    Axios.post('/posts', post)
       .then(res => {
         console.log("Successfully sent post data to backend", res);
         // go on ...
