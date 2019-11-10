@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Card } from "react-bootstrap";
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import Axios from 'axios';
 import CreatePostPrompt from './CreatePostPrompt';
 
 class ScrollFeed extends React.Component {
@@ -13,11 +13,22 @@ class ScrollFeed extends React.Component {
   }
 
   fetchMorePosts = () => {
-    setTimeout(() => {
+    Axios.get('/posts')
+        .then(res => {
+          console.log("Successfully fetched posts data from backend", res);
+          this.setState({
+            posts: this.state.posts.concat(res.data[0].body)
+          });
+        })
+        .catch((error) => {
+          console.log("Couldn't fetch post data from backend", error.response);
+        });
+
+    /* setTimeout(() => {
       this.setState({
         posts: this.state.posts.concat(["new Post", "new Post", "new Post", "new Post", "new Post"])
       });
-    }, 1500);
+    }, 1500); */
   }
 
   render() {
