@@ -12,7 +12,7 @@ class CreatePostPrompt extends React.Component {
 
     Axios.post('/posts', post)
       .then(res => {
-        console.log("Successfully sent post data to backend", res);
+        console.log("Successfully sent post to backend", res);
         // go on ...
       })
       .catch((error) => {

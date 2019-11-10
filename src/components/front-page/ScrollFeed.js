@@ -17,7 +17,7 @@ class ScrollFeed extends React.Component {
       .then(res => {
         console.log("Successfully fetched posts data from backend", res);
         this.setState({
-          posts: this.state.posts.concat(res.data[0].body)
+          posts: this.state.posts.concat(res.data.map(post => post.body))
         });
       })
       .catch((error) => {
