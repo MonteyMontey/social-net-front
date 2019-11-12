@@ -3,7 +3,7 @@ import { Container, Form, Button, Col, Alert } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Axios from 'axios';
-import { withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 
 class Registration extends React.Component {
@@ -46,7 +46,7 @@ class Registration extends React.Component {
       registration.birthday = e.target.datePicker.value
       registration.gender = this.state.gender
 
-      Axios.post('/registration', registration)
+      Axios.post('/users', registration)
         .then(res => {
           console.log("Successfully sent registration data to backend", res);
           this.props.history.push('/frontpage')
@@ -178,7 +178,7 @@ const styles = {
   },
   registration: {
     paddingTop: "50px",
-    paddingBottom: "130px"
+    paddingBottom: "200px"
   }
 };
 
