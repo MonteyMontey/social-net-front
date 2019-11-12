@@ -59,7 +59,7 @@ class LandingPage extends React.Component {
         dismissible
         onClose={() => this.setState({ loginFailedAlert: false })}
         variant="danger">
-        Login failed, username or password is not valid.
+        Login failed, username or password not valid.
       </Alert>
     )
   }

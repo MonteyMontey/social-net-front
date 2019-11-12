@@ -7,7 +7,7 @@ class Header extends React.Component {
 
   login = e => {
     let loginData = {}
-    loginData.username = e.target.username.value;
+    loginData.email = e.target.email.value;
     loginData.password = e.target.password.value;
 
     Axios.post('/login', loginData)
@@ -30,8 +30,19 @@ class Header extends React.Component {
           <Container>
             <Navbar.Brand style={{ fontSize: '30px' }} href="#home">Social-Network</Navbar.Brand>
             <Form onSubmit={this.login} inline>
-              <FormControl id="username" type="text" placeholder="Username" className=" mr-sm-2" />
-              <FormControl id="password" type="password" placeholder="Password" className=" mr-sm-2" />
+              <FormControl maxLength="254"
+                id="email"
+                type="email"
+                placeholder="Email"
+                className=" mr-sm-2" />
+              <FormControl minLength="8"
+                maxLength="25"
+                pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
+                title="[a-zA-Z0-9_$!%^*#/\()?]*"
+                id="password"
+                type="password"
+                placeholder="Password"
+                className=" mr-sm-2" />
               <Button type="submit">Log In</Button>
             </Form>
           </Container>
