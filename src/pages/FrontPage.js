@@ -1,6 +1,4 @@
 import React from 'react'
-import { Container, Card } from "react-bootstrap";
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 import ScrollFeed from '../components/front-page/ScrollFeed';
 import Header from '../components/front-page/Header';

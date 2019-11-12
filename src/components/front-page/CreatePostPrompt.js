@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Button } from "react-bootstrap";
-import InfiniteScroll from 'react-infinite-scroll-component';
 import Axios from 'axios';
 
 class CreatePostPrompt extends React.Component {
