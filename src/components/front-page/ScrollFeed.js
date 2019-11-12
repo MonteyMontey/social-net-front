@@ -7,17 +7,33 @@ import CreatePostPrompt from './CreatePostPrompt';
 class ScrollFeed extends React.Component {
 
   state = {
-    posts: [
-      "post1", "post2", "post3", "post4", "post5", "post6", "post7"
-    ]
+    oldestFetchedPostID: "",
+    numberOfPostsToFetch: 5,
+    posts: [],
+    hasMore: true
   }
 
-  fetchMorePosts = () => {
-    Axios.get('/posts')
+  componentDidMount() {
+    this.fetchPosts();
+  }
+
+  fetchPosts = () => {
+    Axios.get('/posts', {
+      params: {
+        oldestFetchedPostID: this.state.oldestFetchedPostID,
+        numberOfPostsToFetch: this.state.numberOfPostsToFetch
+      }
+    })
       .then(res => {
         console.log("Successfully fetched posts data from backend", res);
+        if (res.data.length === 0){
+          this.setState({
+            hasMore: false
+          });
+        }
         this.setState({
-          posts: this.state.posts.concat(res.data.map(post => post.body))
+          posts: this.state.posts.concat(res.data.map(post => post.body)),
+          oldestFetchedPostID: res.data.slice(-1)[0]._id
         });
       })
       .catch((error) => {
@@ -33,12 +49,12 @@ class ScrollFeed extends React.Component {
             style={{ scrollbarWidth: "none" }} // only implemented for firefox right now
             height="800px"
             dataLength={this.state.posts.length}
-            next={this.fetchMorePosts}
-            hasMore={true}
+            next={this.fetchPosts}
+            hasMore={this.state.hasMore}
             loader={<h4>Loading...</h4>}
             endMessage={
-              <p style={{ textAlign: 'center' }}>
-                <b>Yay! You have seen it all</b>
+              <p style={{ marginTop: '20px', textAlign: 'center' }}>
+                <b>Nothing more to see..</b>
               </p>
             }>
 
