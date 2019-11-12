@@ -53,7 +53,7 @@ class ScrollFeed extends React.Component {
             loader={<h4>Loading...</h4>}
             endMessage={
               <p style={{ marginTop: '20px', textAlign: 'center' }}>
-                <b>Nothing more to see..</b>
+                <b>Nothing more to see.</b>
               </p>
             }>
 
@@ -62,7 +62,7 @@ class ScrollFeed extends React.Component {
               this.state.posts.map((post, index) => (
                 <Card key={index} style={{ width: '100%', margin: 'auto', marginTop: '1rem' }}>
                   <Card.Body>
-                    <Card.Title>Post 1</Card.Title>
+                    <Card.Title>Username</Card.Title>
                     <Card.Text>
                       {post}
                     </Card.Text>
