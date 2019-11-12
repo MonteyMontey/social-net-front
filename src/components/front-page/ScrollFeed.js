@@ -7,7 +7,6 @@ import CreatePostPrompt from './CreatePostPrompt';
 class ScrollFeed extends React.Component {
 
   state = {
-    oldestFetchedPostID: "",
     numberOfPostsToFetch: 5,
     posts: [],
     hasMore: true
@@ -18,8 +17,8 @@ class ScrollFeed extends React.Component {
   }
 
   fetchPosts = () => {
-    Axios.get('/posts', {
-      params: {
+    Axios.get('/posts', { 
+      params: {  
         oldestFetchedPostID: this.state.oldestFetchedPostID,
         numberOfPostsToFetch: this.state.numberOfPostsToFetch
       }
