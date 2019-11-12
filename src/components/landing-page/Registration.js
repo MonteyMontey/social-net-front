@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Button, Col, Alert } from "react-bootstrap";
+import { Container, Form, Button, Col } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Axios from 'axios';
@@ -9,34 +9,12 @@ import { withRouter } from 'react-router-dom'
 class Registration extends React.Component {
   state = {
     date: new Date("August 3, 1997"),
-    gender: "Male",
-    showPasswordsDontMatchAlert: false,
-    showSomethingWentWrong: false
+    gender: "Male"
   };
-
-  PasswordsDontMatchAlert = () => {
-    return (
-      <Alert dismissible
-        onClose={() => this.setState({ showPasswordsDontMatchAlert: false })}
-        variant="danger">
-        Your passwords don't match!
-      </Alert>
-    )
-  }
-
-  SomethingWentWrongAlert = () => {
-    return (
-      <Alert dismissible
-        onClose={() => this.setState({ showSomethingWentWrong: false })}
-        variant="danger">
-        Oops, something went wrong! Please try again.
-      </Alert>
-    )
-  }
 
   submitRegistration = e => {
     if (e.target.formGridPassword.value !== e.target.formGridRepeatPassword.value) {
-      this.setState({ showPasswordsDontMatchAlert: true });
+      this.props.showPasswordsDontMatchAlert();
     } else {
       let registration = {}
       registration.firstName = e.target.formGridFirstName.value
@@ -52,7 +30,7 @@ class Registration extends React.Component {
           this.props.history.push('/frontpage')
         })
         .catch((error) => {
-          this.setState({ showSomethingWentWrong: true });
+          this.props.showSomethingWentWrongAlert();
           console.log("Something went wrong", error.response);
         });
     }
@@ -62,12 +40,9 @@ class Registration extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "#e9ebee", height: "100%", width: "100%" }}>
-        {this.state.showSomethingWentWrong ? <this.SomethingWentWrongAlert /> : null}
-        {this.state.showPasswordsDontMatchAlert ? <this.PasswordsDontMatchAlert /> : null}
         <Container>
           <div style={styles.registration}>
             <h3 style={{ color: "#343a40" }}>Create an account</h3>
-
             <Form onSubmit={this.submitRegistration} style={styles.form}>
 
               <Form.Row>
