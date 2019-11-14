@@ -1,6 +1,7 @@
 import React from 'react';
 import LandingPage from './pages/LandingPage';
 import FrontPage from './pages/FrontPage';
+import withAuth from './components/withAuth';
 
 
 import {
@@ -13,12 +14,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact>
-          <LandingPage />
-        </Route>
-        <Route path="/frontpage" exact>
-          <FrontPage />
-        </Route>
+        <Route path="/" component={LandingPage} exact />
+        <Route path="/frontpage" component={withAuth(FrontPage)} exact />
       </Switch>
     </Router>
   );

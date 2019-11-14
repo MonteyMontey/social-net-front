@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import ScrollFeed from '../components/front-page/ScrollFeed';
 import Header from '../components/front-page/Header';

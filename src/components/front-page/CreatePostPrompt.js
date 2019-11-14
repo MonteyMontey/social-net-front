@@ -5,20 +5,21 @@ import Axios from 'axios';
 class CreatePostPrompt extends React.Component {
 
   submitPost = e => {
+    const postBox = e.target.postBox;
     let post = {};
-    post.user = "PLACEHOLDER_USER_ID";
-    post.body = e.target.post.value;
+    post.body = postBox.value;
 
     Axios.post('/posts', post)
       .then(res => {
         console.log("Successfully sent post to backend", res);
-        // go on ...
+        this.props.addNewPost(res.data);
+        postBox.value = "";
       })
       .catch((error) => {
         console.log("Something went wrong", error.response);
       });
 
-    e.preventDefault()
+    e.preventDefault();
   }
 
   render() {
@@ -29,7 +30,7 @@ class CreatePostPrompt extends React.Component {
           marginTop: "20px", marginBottom: "50px", padding: "15px", backgroundColor: "white"
         }}>
         <Form.Group>
-          <Form.Control id="post" as="textarea" rows="3" maxLength={280}
+          <Form.Control id="postBox" as="textarea" rows="3" maxLength={280}
             placeholder="What's on your mind?" />
         </Form.Group>
         <Button variant="primary" type="submit">Post</Button>
