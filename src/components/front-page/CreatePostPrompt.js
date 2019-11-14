@@ -6,7 +6,6 @@ class CreatePostPrompt extends React.Component {
 
   submitPost = e => {
     let post = {};
-    post.user = "PLACEHOLDER_USER_ID";
     post.body = e.target.post.value;
 
     Axios.post('/posts', post)

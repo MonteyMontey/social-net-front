@@ -17,21 +17,21 @@ class ScrollFeed extends React.Component {
   }
 
   fetchPosts = () => {
-    Axios.get('/posts', { 
-      params: {  
+    Axios.get('/posts', {
+      params: {
         oldestFetchedPostID: this.state.oldestFetchedPostID,
         numberOfPostsToFetch: this.state.numberOfPostsToFetch
       }
     })
       .then(res => {
         console.log("Successfully fetched posts data from backend", res);
-        if (res.data.length === 0){
+        if (res.data.length === 0) {
           this.setState({
             hasMore: false
           });
         }
         this.setState({
-          posts: this.state.posts.concat(res.data.map(post => post.body)),
+          posts: this.state.posts.concat(res.data),
           oldestFetchedPostID: res.data.slice(-1)[0]._id
         });
       })
@@ -56,15 +56,14 @@ class ScrollFeed extends React.Component {
                 <b>Nothing more to see.</b>
               </p>
             }>
-
             <CreatePostPrompt />
             {
               this.state.posts.map((post, index) => (
                 <Card key={index} style={{ width: '100%', margin: 'auto', marginTop: '1rem' }}>
                   <Card.Body>
-                    <Card.Title>Username</Card.Title>
+                    <Card.Title>{post.user.firstName + " " + post.user.lastName}</Card.Title>
                     <Card.Text>
-                      {post}
+                      {post.body}
                     </Card.Text>
                     <Card.Text>
                       <small className="text-muted">3 mins ago</small>

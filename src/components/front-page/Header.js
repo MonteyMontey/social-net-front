@@ -16,9 +16,9 @@ export default function Header() {
         <Dropdown>
           <Dropdown.Toggle className="ml-sm-5 mr-sm-5" variant="primary" id="dropdown-basic" />
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1"><i style={{ marginRight: "15px" }} class="fas fa-cog"></i>Settings</Dropdown.Item>
+            <Dropdown.Item href="#/action-1"><i style={{ marginRight: "15px" }} className="fas fa-cog"></i>Settings</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item href="#/action-3"><i style={{ marginRight: "15px" }} class="fas fa-power-off"></i>Logout</Dropdown.Item>
+            <Dropdown.Item href="#/action-3"><i style={{ marginRight: "15px" }} className="fas fa-power-off"></i>Logout</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
