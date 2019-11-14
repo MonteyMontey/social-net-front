@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navbar, Form, FormControl, Nav, Dropdown } from 'react-bootstrap';
+import cookie from 'react-cookies';
 
 export default function Header() {
   return (
@@ -18,7 +19,7 @@ export default function Header() {
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1"><i style={{ marginRight: "15px" }} className="fas fa-cog"></i>Settings</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item href="#/action-3"><i style={{ marginRight: "15px" }} className="fas fa-power-off"></i>Logout</Dropdown.Item>
+            <Dropdown.Item href="/" onClick={() => cookie.remove('token', {path: '/'})}><i style={{ marginRight: "15px" }} className="fas fa-power-off"></i>Logout</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
