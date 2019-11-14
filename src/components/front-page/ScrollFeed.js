@@ -16,6 +16,37 @@ class ScrollFeed extends React.Component {
     this.fetchPosts();
   }
 
+// shamelessly copied (and then modified) from https://stackoverflow.com/questions/6108819/javascript-timestamp-to-relative-time-eg-2-seconds-ago-one-week-ago-etc-best
+  timeSince = (date) => {
+    const now = new Date();
+    const secondsPast = (now.getTime() - date.getTime()) / 1000;
+
+    if (secondsPast < 60) {
+      const parsed = parseInt(secondsPast);
+      return parsed <= 1 ? '1 second ago' : parsed + ' seconds ago';
+    }
+    if (secondsPast < 3600) {
+      const parsed = parseInt(secondsPast / 60);
+      return parsed === 1 ? '1 minute ago' : parsed + ' minutes ago';
+    }
+    if (secondsPast <= 86400) {
+      const parsed = parseInt(secondsPast / 3600);
+      return parsed === 1 ? '1 hour ago' : parsed + ' hours ago';
+    }
+    if (secondsPast > 86400) {
+      const day = date.getDate();
+      const month = date.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ", "");
+      const year = date.getFullYear() === now.getFullYear() ? "" : " " + date.getFullYear();
+      return day + " " + month + year;
+    }
+  }
+
+  addNewPost = (post) => {
+    this.setState({
+      posts: [post].concat(this.state.posts)
+    });
+  }
+
   fetchPosts = () => {
     Axios.get('/posts', {
       params: {
@@ -56,7 +87,7 @@ class ScrollFeed extends React.Component {
                 <b>Nothing more to see.</b>
               </p>
             }>
-            <CreatePostPrompt />
+            <CreatePostPrompt addNewPost={this.addNewPost} />
             {
               this.state.posts.map((post, index) => (
                 <Card key={index} style={{ width: '100%', margin: 'auto', marginTop: '1rem' }}>
@@ -66,7 +97,7 @@ class ScrollFeed extends React.Component {
                       {post.body}
                     </Card.Text>
                     <Card.Text>
-                      <small className="text-muted">3 mins ago</small>
+                      <small className="text-muted">{this.timeSince(new Date(post.date))}</small>
                     </Card.Text>
                   </Card.Body>
                 </Card>
