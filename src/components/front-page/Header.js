@@ -5,11 +5,12 @@ import cookie from 'react-cookies';
 export default function Header() {
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand className="ml-sm-5" style={{ fontSize: '30px' }} href="#home">Social-Network</Navbar.Brand>
+      <Navbar.Brand className="ml-sm-5" style={{ fontSize: '30px' }} href="/frontpage">Social-Network</Navbar.Brand>
       <Form inline>
         <FormControl style={{ width: "400px", height: "35px" }} type="text" placeholder="Search" className="ml-sm-5" />
       </Form>
       <Nav className="ml-auto mr-sm-5">
+        <Nav.Link className="mr-sm-5" href="#home"><b>Home</b></Nav.Link>
         <Nav.Link href="#FriendRequests"><i className="fas fa-users fa-lg"></i></Nav.Link>
         <Nav.Link href="#Messages"><i className="fas fa-comments fa-lg"></i></Nav.Link>
         <Nav.Link href="#Alerts"><i className="fas fa-bell fa-lg"></i></Nav.Link>

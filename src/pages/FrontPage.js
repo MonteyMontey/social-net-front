@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container} from "react-bootstrap";
 
 import ScrollFeed from '../components/front-page/ScrollFeed';
 import Header from '../components/front-page/Header';
@@ -7,10 +8,12 @@ class FrontPage extends React.Component {
 
   render() {
     return (
-      <div style={{ backgroundColor: "#e9ebee", height: "100vh", width: "100wh" }}>
+      <React.Fragment>
         <Header />
-        <ScrollFeed />
-      </div>
+        <Container style={{ width: "900px" }}>
+          <ScrollFeed createPostPrompt/>
+        </Container>
+      </React.Fragment>
     );
   }
 }

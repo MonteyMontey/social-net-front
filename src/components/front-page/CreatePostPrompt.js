@@ -30,12 +30,11 @@ class CreatePostPrompt extends React.Component {
           marginTop: "20px", marginBottom: "50px", padding: "15px", backgroundColor: "white"
         }}>
         <Form.Group>
-          <Form.Control id="postBox" as="textarea" rows="3" maxLength={280}
+          <Form.Control style={{resize: 'none'}} id="postBox" as="textarea" rows="3" maxLength={280}
             placeholder="What's on your mind?" />
         </Form.Group>
         <Button variant="primary" type="submit">Post</Button>
       </Form>
-
     )
   }
 }
