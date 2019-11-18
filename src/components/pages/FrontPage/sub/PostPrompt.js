@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Button } from "react-bootstrap";
 import Axios from 'axios';
 
-class CreatePostPrompt extends React.Component {
+class PostPrompt extends React.Component {
 
   submitPost = e => {
     const postBox = e.target.postBox;
@@ -20,7 +20,7 @@ class CreatePostPrompt extends React.Component {
       });
 
     e.preventDefault();
-  }
+  };
 
   render() {
     return (
@@ -39,4 +39,4 @@ class CreatePostPrompt extends React.Component {
   }
 }
 
-export default CreatePostPrompt;
+export default PostPrompt;

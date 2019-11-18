@@ -1,27 +1,20 @@
 import React from 'react';
-import LandingPage from './pages/LandingPage';
-import FrontPage from './pages/FrontPage';
-import UserPage from './pages/UserPage';
-import withAuth from './components/withAuth';
-
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import Landing from './components/pages/LandingPage/LandingPage';
+import Home from './components/pages/FrontPage/FrontPage';
+import User from './components/pages/UserPage/UserPage';
+import withAuth from './components/auth/withAuth';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={LandingPage} exact />
-        <Route path="/frontpage" component={withAuth(FrontPage)} exact />
-        <Route path="/user/:userId" component={withAuth(UserPage)} exact />
+        <Route path="/" component={Landing} exact />
+        <Route path="/frontpage" component={withAuth(Home)} exact />
+        <Route path="/user/:userId" component={withAuth(User)} exact />
       </Switch>
     </Router>
   );
 }
-
 
 export default App;

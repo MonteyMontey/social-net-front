@@ -6,29 +6,30 @@ import Axios from 'axios';
 class Header extends React.Component {
 
   login = e => {
+
     let loginData = {}
     loginData.email = e.target.email.value;
     loginData.password = e.target.password.value;
 
     Axios.post('/login', loginData)
       .then(res => {
-        console.log("Successful logged in!")
-        this.props.history.push('/frontpage')
+        console.log(res);
+        this.props.history.push('/frontpage');
       })
-      .catch((error) => {
-        this.props.showLoginFailedAlert();
-        console.error(error.response);
+      .catch((err) => {
+        this.props.showLoginFailedAlert(true);
+        console.error(err);
       });
 
     e.preventDefault();
-  }
+  };
 
   render() {
     return (
       <React.Fragment>
-        <Navbar style={{ padding: '10px' }} bg="dark" variant="dark">
+        <Navbar style={this.styles.navbar} bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand style={{ fontSize: '30px' }} href="#home">Social-Network</Navbar.Brand>
+            <Navbar.Brand style={this.styles.logo} href="#home">Social-Network</Navbar.Brand>
             <Form onSubmit={this.login} inline>
               <FormControl maxLength="254"
                 id="email"
@@ -50,6 +51,15 @@ class Header extends React.Component {
       </React.Fragment>
     )
   }
+
+  styles = {
+    navbar: {
+      padding: '10px'
+    },
+    logo: {
+      fontSize: '30px'
+    }
+  };
 }
 
 export default withRouter(Header);
