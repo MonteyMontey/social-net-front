@@ -8,8 +8,24 @@ import Axios from 'axios';
 class UserPage extends React.Component {
 
   state = {
-
+    buttonDisabled: false
   }
+
+  sendFriendRequest = () => {
+    Axios.post('/neo4j/friendRequest', {
+      personId: this.state.userID
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    this.setState({
+      buttonDisabled: true
+    });
+  };
 
   componentDidMount() {
     this.setState({
@@ -22,13 +38,31 @@ class UserPage extends React.Component {
       }
     })
       .then(res => {
-        console.log("res", res)
+        console.log(res);
         this.setState({
           name: res.data.firstName + " " + res.data.lastName
         });
       })
-      .catch((error) => {
-        console.error(error.response);
+      .catch((err) => {
+        console.error(err);
+      });
+
+
+    Axios.get('/neo4j/relationToPerson', {
+      params: {
+        personId: this.props.match.params.userId
+      }
+    })
+      .then(res => {
+        if (res.data === "FriendRequest"){
+          this.setState({
+            buttonDisabled: true
+          });
+        }
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err.response);
       });
   }
 
@@ -42,7 +76,12 @@ class UserPage extends React.Component {
               <img style={this.styles.profileImage} alt="profile" src={userProfile} />
               <div style={this.styles.profileDescription}>
                 <h1>{this.state.name}</h1>
-                <Button className="mt-2" variant="primary">Add <i className="ml-sm-2 fas fa-user-plus"></i></Button>
+                <Button onClick={this.sendFriendRequest}
+                  disabled={this.state.buttonDisabled}
+                  className="mt-2"
+                  variant="primary">
+                  Add <i className="ml-sm-2 fas fa-user-plus"></i>
+                </Button>
               </div>
             </Col>
             <Col xs={5}>
