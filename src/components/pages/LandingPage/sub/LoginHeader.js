@@ -3,7 +3,7 @@ import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Axios from 'axios';
 
-class Header extends React.Component {
+class LoginHeader extends React.Component {
 
   login = e => {
 
@@ -62,4 +62,4 @@ class Header extends React.Component {
   };
 }
 
-export default withRouter(Header);
+export default withRouter(LoginHeader);
