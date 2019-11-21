@@ -29,4 +29,13 @@ const timeSince = (date) => {
   }
 };
 
-export { removeAccessToken, timeSince };
+const parseForNewNotifications = (notifications) => {
+  for (let notification of notifications) {
+    if (notification.isRead === false) {
+      return true
+    }
+  }
+  return false
+}
+
+export { removeAccessToken, timeSince, parseForNewNotifications };
