@@ -1,6 +1,6 @@
 import React from 'react';
 import userProfile from '../../../images/user_profile.png';
-import NavHeader from '../../shared/NavHeader';
+import NavHeader from '../../shared/NavHeader/NavHeader';
 import ScrollFeed from '../../shared/ScrollFeed/ScrollFeed';
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Axios from 'axios';

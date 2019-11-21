@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from "react-bootstrap";
 
 import ScrollFeed from '../../shared/ScrollFeed/ScrollFeed';
-import NavHeader from '../../shared/NavHeader';
+import NavHeader from '../../shared//NavHeader/NavHeader';
 
 
 class FrontPage extends React.Component {
