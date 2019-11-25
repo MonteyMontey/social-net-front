@@ -13,12 +13,25 @@ class NavHeader extends React.Component {
     friendRequests: []
   }
 
-  toggleFriendRequestDropdown = () => {
-    this.setState({
-      newFriendRequest: false
-    });
+  toggleFriendRequestDropdown = (show) => {
+    if (show) {
+      this.setState({
+        newFriendRequest: false
+      });
 
-    // send axios request with id of new posts to node endpoint to set to isRead: true
+      const idArray = this.state.friendRequests
+        .map(friendRequest => friendRequest.isRead ? null : friendRequest._id)
+        .filter(el => {
+          return el != null;
+        });
+
+      if (idArray.length > 0) {
+        Axios.post('/notifications', idArray)
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
   }
 
   componentDidMount() {
