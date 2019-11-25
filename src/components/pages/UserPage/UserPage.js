@@ -54,7 +54,7 @@ class UserPage extends React.Component {
       }
     })
       .then(res => {
-        if (res.data === "FriendRequest"){
+        if (res.data === "FriendRequest" || res.data === "Friends") {
           this.setState({
             buttonDisabled: true
           });

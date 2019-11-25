@@ -11,12 +11,21 @@ class FriendRequest extends React.Component {
     successText: "Accept"
   }
 
+  componentDidMount() {
+    this.setState({
+      accepted: this.props.isAccepted,
+      declined: this.props.isDeclined,
+      buttonsDisabled: this.props.isAccepted || this.props.isDeclined ? true : false
+    });
+  }
+
   accept = (e) => {
     this.setState({
       buttonsDisabled: true,
       accepted: true,
       successText: "Accepted"
     });
+    this.props.accepted();
     e.stopPropagation();
   };
 
@@ -26,6 +35,7 @@ class FriendRequest extends React.Component {
       declined: true,
       dangerText: "Declined"
     });
+    this.props.declined();
     e.stopPropagation();
   };
 

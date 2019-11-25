@@ -19,7 +19,12 @@ class NotificationDropdown extends React.Component {
             <React.Fragment key={Math.floor(Math.random() * 1000000)}>
               {index === 0 ? null : <Dropdown.Divider />}
               <Dropdown.Item className="item" key={index}>
-                <FriendRequest firstName={notification.sender.firstName} lastName={notification.sender.lastName}/>
+                <FriendRequest accepted={() => this.props.friendRequestAccepted(notification._id, notification.sender, notification.receiver)}
+                  declined={() => this.props.friendRequestDeclined(notification._id, notification.sender, notification.receiver)}
+                  firstName={notification.sender.firstName}
+                  lastName={notification.sender.lastName}
+                  isAccepted={notification.accepted}
+                  isDeclined={notification.declined} />
               </Dropdown.Item>
             </React.Fragment>
           )) : <Dropdown.Item>No new notifications</Dropdown.Item>}

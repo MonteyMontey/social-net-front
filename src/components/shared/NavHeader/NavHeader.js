@@ -26,7 +26,7 @@ class NavHeader extends React.Component {
         });
 
       if (idArray.length > 0) {
-        Axios.post('/notifications', idArray)
+        Axios.put('/notifications/friendRequests', { ids: idArray, update: { isRead: true } })
           .catch((err) => {
             console.error(err);
           });
@@ -36,8 +36,8 @@ class NavHeader extends React.Component {
 
   componentDidMount() {
     console.log("mounted")
-    this.checkForNotifications();
-    setInterval(() => this.checkForNotifications(), 10000);
+    this.checkForFriendRequestNotifications();
+    setInterval(() => this.checkForFriendRequestNotifications(), 10000);
   }
 
   componentWillUnmount() {
@@ -45,8 +45,8 @@ class NavHeader extends React.Component {
     clearInterval();
   }
 
-  checkForNotifications = () => {
-    Axios.get('/notifications')
+  checkForFriendRequestNotifications = () => {
+    Axios.get('/notifications/friendRequests')
       .then(res => {
         this.setState({ friendRequests: res.data });
 
@@ -61,6 +61,46 @@ class NavHeader extends React.Component {
       });
   }
 
+  friendRequestAccepted = (id, sender, receiver) => {
+    const updatedFriendRequests = this.state.friendRequests;
+    for (let i = 0; i < updatedFriendRequests.length; i++) {
+      if (updatedFriendRequests[i]._id === id) {
+        updatedFriendRequests[i].accepted = true
+      }
+    }
+    this.setState({
+      friendRequests: updatedFriendRequests
+    });
+    Axios.put('/notifications/friendRequests', { ids: [id], update: { accepted: true } })
+      .catch((err) => {
+        console.error(err);
+      });
+    Axios.put('/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "accepted" })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  friendRequestDeclined = (id, sender, receiver) => {
+    const updatedFriendRequests = this.state.friendRequests;
+    for (let i = 0; i < updatedFriendRequests.length; i++) {
+      if (updatedFriendRequests[i]._id === id) {
+        updatedFriendRequests[i].declined = true
+      }
+    }
+    this.setState({
+      friendRequests: updatedFriendRequests
+    });
+    Axios.put('/notifications/friendRequests', { ids: [id], update: { declined: true } })
+      .catch((err) => {
+        console.error(err);
+      });
+    Axios.put('/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "declined" })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   render() {
     return (
       <Navbar bg="dark" variant="dark">
@@ -74,7 +114,9 @@ class NavHeader extends React.Component {
             newNotification={this.state.newFriendRequest}
             iconClass="fas fa-users fa-lg"
             notifications={this.state.friendRequests}
-            toggle={this.toggleFriendRequestDropdown} />
+            toggle={this.toggleFriendRequestDropdown}
+            friendRequestAccepted={this.friendRequestAccepted}
+            friendRequestDeclined={this.friendRequestDeclined} />
           <NotificationDropdown id="messages" iconClass="fas fa-comments fa-lg" />
           <NotificationDropdown id="alerts" iconClass="fas fa-bell fa-lg" />
           <Dropdown>
