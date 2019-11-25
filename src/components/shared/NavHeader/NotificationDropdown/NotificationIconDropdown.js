@@ -1,7 +1,9 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 
+import '../../FriendRequest';
 import './NotificationDropdown.css';
+import FriendRequest from '../../FriendRequest';
 
 class NotificationDropdown extends React.Component {
 
@@ -16,8 +18,8 @@ class NotificationDropdown extends React.Component {
           {this.props.notifications ? this.props.notifications.map((notification, index) => (
             <React.Fragment key={Math.floor(Math.random() * 1000000)}>
               {index === 0 ? null : <Dropdown.Divider />}
-              <Dropdown.Item key={index}>
-                {notification.sender.firstName + " " + notification.sender.lastName + " sent you a friend request!"}
+              <Dropdown.Item className="item" key={index}>
+                <FriendRequest firstName={notification.sender.firstName} lastName={notification.sender.lastName}/>
               </Dropdown.Item>
             </React.Fragment>
           )) : <Dropdown.Item>No new notifications</Dropdown.Item>}
