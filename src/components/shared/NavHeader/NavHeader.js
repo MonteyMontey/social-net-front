@@ -1,9 +1,10 @@
 import React from 'react';
-import { Navbar, Form, FormControl, Nav, Dropdown } from 'react-bootstrap';
+import { Navbar, Form, Nav, Dropdown } from 'react-bootstrap';
 import Axios from 'axios';
 
 import { removeAccessToken, parseForNewNotifications } from '../../../utils';
 import NotificationDropdown from './NotificationDropdown/NotificationIconDropdown.js';
+import Searchbar from './Searchbar/Searchbar';
 
 
 class NavHeader extends React.Component {
@@ -106,7 +107,7 @@ class NavHeader extends React.Component {
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand className="ml-sm-5" style={this.styles.logo} href="/frontpage">Social-Network</Navbar.Brand>
         <Form inline>
-          <FormControl style={this.styles.search} type="text" placeholder="Search" className="ml-sm-5" />
+            <Searchbar></Searchbar>
         </Form>
         <Nav className="ml-auto mr-sm-5">
           <NotificationDropdown
@@ -135,12 +136,7 @@ class NavHeader extends React.Component {
   styles = {
     logo: {
       fontSize: '30px'
-    },
-    search: {
-      width: "400px",
-      height: "35px"
     }
-
   }
 }
 

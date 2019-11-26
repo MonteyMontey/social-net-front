@@ -41,7 +41,7 @@ class ScrollFeed extends React.Component {
         }
         this.setState({
           posts: this.state.posts.concat(res.data),
-          oldestFetchedPostID: res.data.slice(-1)[0]._id
+          oldestFetchedPostID: res.data.length > 0 ? res.data.slice(-1)[0]._id : null
         });
       })
       .catch((error) => {

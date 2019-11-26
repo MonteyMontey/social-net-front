@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <Router>
+    <Router forceRefresh={true}>
       <Switch>
         <Route path="/" component={Landing} exact />
         <Route path="/frontpage" component={withAuth(Home)} exact />
