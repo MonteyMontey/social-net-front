@@ -59,7 +59,9 @@ class UserPage extends React.Component {
             buttonDisabled: true
           });
         }
-        console.log(res.data);
+        this.setState({
+          relation: res.data
+        });
       })
       .catch((err) => {
         console.error(err.response);
@@ -67,6 +69,28 @@ class UserPage extends React.Component {
   }
 
   render() {
+
+    const FriendsButton = () => {
+      return (
+        <Button disabled={true}
+          className="mt-2"
+          variant="primary">
+          Friends <i className="ml-sm-2 fas fa-check"></i>
+        </Button>
+      )
+    }
+
+    const FriendRequestButton = () => {
+      return (
+        <Button onClick={this.sendFriendRequest}
+          disabled={this.state.buttonDisabled}
+          className="mt-2"
+          variant="primary">
+          Add <i className="ml-sm-2 fas fa-user-plus"></i>
+        </Button>
+      )
+    }
+
     return (
       <React.Fragment>
         <NavHeader />
@@ -76,12 +100,7 @@ class UserPage extends React.Component {
               <img style={this.styles.profileImage} alt="profile" src={userProfile} />
               <div style={this.styles.profileDescription}>
                 <h1>{this.state.name}</h1>
-                <Button onClick={this.sendFriendRequest}
-                  disabled={this.state.buttonDisabled}
-                  className="mt-2"
-                  variant="primary">
-                  Add <i className="ml-sm-2 fas fa-user-plus"></i>
-                </Button>
+                {this.state.relation === "Friends" ?  <FriendsButton /> : <FriendRequestButton />}
               </div>
             </Col>
             <Col xs={5}>

@@ -15,7 +15,7 @@ class NotificationDropdown extends React.Component {
           {this.props.newNotification ? <i style={{ color: 'red', marginLeft: "3px" }} className="fas fa-exclamation"></i> : null}
         </Dropdown.Toggle>
         <Dropdown.Menu className="dropdownMenu">
-          {this.props.notifications ? this.props.notifications.map((notification, index) => (
+          {this.props.notifications.length !== 0 ? this.props.notifications.map((notification, index) => (
             <React.Fragment key={Math.floor(Math.random() * 1000000)}>
               {index === 0 ? null : <Dropdown.Divider />}
               <Dropdown.Item className="item" key={index}>

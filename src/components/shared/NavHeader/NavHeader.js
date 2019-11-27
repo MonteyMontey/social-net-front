@@ -118,8 +118,8 @@ class NavHeader extends React.Component {
             toggle={this.toggleFriendRequestDropdown}
             friendRequestAccepted={this.friendRequestAccepted}
             friendRequestDeclined={this.friendRequestDeclined} />
-          <NotificationDropdown id="messages" iconClass="fas fa-comments fa-lg" />
-          <NotificationDropdown id="alerts" iconClass="fas fa-bell fa-lg" />
+          <NotificationDropdown notifications={[]} id="messages" iconClass="fas fa-comments fa-lg" />
+          <NotificationDropdown notifications={[]} id="alerts" iconClass="fas fa-bell fa-lg" />
           <Dropdown>
             <Dropdown.Toggle className="ml-sm-5 mr-sm-5" variant="primary" id="dropdown-basic" />
             <Dropdown.Menu>
