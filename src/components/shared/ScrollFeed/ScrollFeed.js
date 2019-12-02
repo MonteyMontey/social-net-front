@@ -52,8 +52,7 @@ class ScrollFeed extends React.Component {
   render() {
     return (
       <InfiniteScroll
-        style={this.styles.scrollbar}
-        height="800px"
+        style={{scrollbarWidth: "none", ...this.props.style}}
         dataLength={this.state.posts.length}
         next={this.fetchPosts}
         hasMore={this.state.hasMore}
@@ -78,9 +77,6 @@ class ScrollFeed extends React.Component {
   }
 
   styles = {
-    scrollbar: {
-      scrollbarWidth: "none" // only implemented for firefox right now
-    },
     endMessage: {
       marginTop: '20px',
       textAlign: 'center'

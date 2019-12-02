@@ -11,7 +11,7 @@ class FrontPage extends React.Component {
       <React.Fragment>
         <NavHeader />
         <Container style={styles.container}>
-          <ScrollFeed postPrompt />
+          <ScrollFeed style={{height: "90vh"}} postPrompt />
         </Container>
       </React.Fragment>
     );

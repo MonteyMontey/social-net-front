@@ -105,7 +105,7 @@ class UserPage extends React.Component {
             </Col>
             <Col xs={5}>
               <div style={this.styles.scrollFeed}>
-                <ScrollFeed userID={this.props.match.params.userId} />
+                <ScrollFeed style={{height: "85vh"}} userID={this.props.match.params.userId} />
               </div>
             </Col>
             <Col />
