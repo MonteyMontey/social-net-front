@@ -8,7 +8,7 @@ class FriendRequest extends React.Component {
     accepted: false,
     declined: false,
     dangerText: "Decline",
-    successText: "Accept"
+    successText: "Accept",
   }
 
   componentDidMount() {

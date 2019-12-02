@@ -4,7 +4,6 @@ import { Dropdown } from 'react-bootstrap';
 import '../../FriendRequest';
 import './NotificationDropdown.css';
 import FriendRequest from '../../FriendRequest';
-import BellAlert from '../../BellAlert';
 
 class NotificationDropdown extends React.Component {
 
@@ -25,7 +24,7 @@ class NotificationDropdown extends React.Component {
                   firstName={notification.sender.firstName}
                   lastName={notification.sender.lastName}
                   isAccepted={notification.accepted}
-                  isDeclined={notification.declined} /> : <BellAlert text={notification.body}></BellAlert>}
+                  isDeclined={notification.declined} /> : notification.body}
               </Dropdown.Item>
             </React.Fragment>
           )) : <Dropdown.Item>No new notifications</Dropdown.Item>}
