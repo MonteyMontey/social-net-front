@@ -4,6 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import '../../FriendRequest';
 import './NotificationDropdown.css';
 import FriendRequest from '../../FriendRequest';
+import BellAlert from '../../BellAlert';
 
 class NotificationDropdown extends React.Component {
 
@@ -19,12 +20,12 @@ class NotificationDropdown extends React.Component {
             <React.Fragment key={Math.floor(Math.random() * 1000000)}>
               {index === 0 ? null : <Dropdown.Divider />}
               <Dropdown.Item className="item" key={index}>
-                <FriendRequest accepted={() => this.props.friendRequestAccepted(notification._id, notification.sender, notification.receiver)}
+                {this.props.id === "friendRequests" ? <FriendRequest accepted={() => this.props.friendRequestAccepted(notification._id, notification.sender, notification.receiver)}
                   declined={() => this.props.friendRequestDeclined(notification._id, notification.sender, notification.receiver)}
                   firstName={notification.sender.firstName}
                   lastName={notification.sender.lastName}
                   isAccepted={notification.accepted}
-                  isDeclined={notification.declined} />
+                  isDeclined={notification.declined} /> : <BellAlert text={notification.body}></BellAlert>}
               </Dropdown.Item>
             </React.Fragment>
           )) : <Dropdown.Item>No new notifications</Dropdown.Item>}

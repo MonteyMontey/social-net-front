@@ -11,7 +11,29 @@ class NavHeader extends React.Component {
 
   state = {
     newFriendRequest: false,
-    friendRequests: []
+    friendRequests: [],
+    alerts: []
+  }
+
+  toggleAlertDropdown = (show) => {
+    if (show) {
+      this.setState({
+        newAlert: false
+      });
+
+      const idArray = this.state.alerts
+        .map(alert => alert.isRead ? null : alert._id)
+        .filter(el => {
+          return el != null;
+        });
+
+      if (idArray.length > 0) {
+        Axios.put('/notifications/alerts', { ids: idArray, update: { isRead: true } })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
   }
 
   toggleFriendRequestDropdown = (show) => {
@@ -38,12 +60,29 @@ class NavHeader extends React.Component {
   componentDidMount() {
     console.log("mounted")
     this.checkForFriendRequestNotifications();
-    setInterval(() => this.checkForFriendRequestNotifications(), 10000);
+    this.checkForAlerts();
+    setInterval(() => this.checkForFriendRequestNotifications(), 5000);
+    setInterval(() => this.checkForAlerts(), 5000);
   }
 
   componentWillUnmount() {
     console.log("unmounted")
     clearInterval();
+  }
+
+  checkForAlerts = () => {
+    Axios.get('/notifications/alerts')
+      .then(res => {
+        this.setState({ alerts: res.data });
+        if (res.data.length > 0 && parseForNewNotifications(res.data)) {
+          this.setState({
+            newAlert: true
+          })
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   checkForFriendRequestNotifications = () => {
@@ -72,7 +111,7 @@ class NavHeader extends React.Component {
     this.setState({
       friendRequests: updatedFriendRequests
     });
-    Axios.put('/notifications/friendRequests', { ids: [id], update: { accepted: true } })
+    Axios.put('/notifications/friendRequests', {  sender: sender, receiver: receiver, ids: [id], update: { accepted: true } })
       .catch((err) => {
         console.error(err);
       });
@@ -92,7 +131,7 @@ class NavHeader extends React.Component {
     this.setState({
       friendRequests: updatedFriendRequests
     });
-    Axios.put('/notifications/friendRequests', { ids: [id], update: { declined: true } })
+    Axios.put('/notifications/friendRequests', { sender: sender, receiver: receiver, ids: [id], update: { declined: true } })
       .catch((err) => {
         console.error(err);
       });
@@ -119,7 +158,12 @@ class NavHeader extends React.Component {
             friendRequestAccepted={this.friendRequestAccepted}
             friendRequestDeclined={this.friendRequestDeclined} />
           <NotificationDropdown notifications={[]} id="messages" iconClass="fas fa-comments fa-lg" />
-          <NotificationDropdown notifications={[]} id="alerts" iconClass="fas fa-bell fa-lg" />
+          <NotificationDropdown 
+            notifications={this.state.alerts} 
+            newNotification={this.state.newAlert}
+            toggle={this.toggleAlertDropdown}
+            id="alerts" 
+            iconClass="fas fa-bell fa-lg" />
           <Dropdown>
             <Dropdown.Toggle className="ml-sm-5 mr-sm-5" variant="primary" id="dropdown-basic" />
             <Dropdown.Menu>
