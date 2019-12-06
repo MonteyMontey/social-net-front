@@ -1,4 +1,5 @@
 import cookie from 'react-cookies';
+import Axios from 'axios';
 
 const removeAccessToken = () => {
   cookie.remove('token', { path: '/' });
@@ -38,4 +39,9 @@ const parseForNewNotifications = (notifications) => {
   return false
 }
 
-export { removeAccessToken, timeSince, parseForNewNotifications };
+const sendLog = (log, type = "error") => {
+  Axios.post('http://localhost:5555/logs', { log, type })
+    .catch();
+}
+
+export { removeAccessToken, timeSince, parseForNewNotifications, sendLog };

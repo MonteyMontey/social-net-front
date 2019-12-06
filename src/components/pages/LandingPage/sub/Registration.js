@@ -4,6 +4,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Axios from 'axios';
 
+import { sendLog } from '../../../../utils';
+
 
 class Registration extends React.Component {
   state = {
@@ -32,7 +34,7 @@ class Registration extends React.Component {
         })
         .catch((err) => {
           this.props.showSomethingWentWrongAlert(true);
-          console.error(err);
+          sendLog(err, "connection error");
         });
     }
 

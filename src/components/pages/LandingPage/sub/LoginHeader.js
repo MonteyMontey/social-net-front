@@ -3,6 +3,8 @@ import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Axios from 'axios';
 
+import { sendLog } from '../../../../utils';
+
 class LoginHeader extends React.Component {
 
   login = e => {
@@ -17,8 +19,13 @@ class LoginHeader extends React.Component {
         this.props.history.push('/frontpage');
       })
       .catch((err) => {
-        this.props.showLoginFailedAlert(true);
-        console.error(err);
+        // wrong credentials
+        if (err.response) {
+          this.props.showLoginFailedAlert(true);
+        } else if (err.request) { // no connection from backend
+          this.props.showLoginFailedAlert(true);
+          sendLog(err, "connection error");
+        }
       });
 
     e.preventDefault();

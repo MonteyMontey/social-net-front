@@ -5,6 +5,8 @@ import ScrollFeed from '../../shared/ScrollFeed/ScrollFeed';
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Axios from 'axios';
 
+import { sendLog } from '../../../utils';
+
 class UserPage extends React.Component {
 
   state = {
@@ -19,7 +21,7 @@ class UserPage extends React.Component {
         console.log(res);
       })
       .catch((err) => {
-        console.error(err);
+        sendLog(err, "connection error");
       });
 
     this.setState({

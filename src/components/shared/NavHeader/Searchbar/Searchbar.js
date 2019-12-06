@@ -6,6 +6,7 @@ import Axios from 'axios';
 import Avatar from '../../../../images/user_profile.png';
 import './Searchbar.css';
 
+import { sendLog } from '../../../../utils';
 
 const getSuggestionValue = suggestion => suggestion.firstName + " " + suggestion.lastName;
 
@@ -41,7 +42,7 @@ class Searchbar extends React.Component {
         });
       })
       .catch(err => {
-        console.error(err);
+        sendLog(err, "connection error");
         this.setState({
           suggestions: []
         });

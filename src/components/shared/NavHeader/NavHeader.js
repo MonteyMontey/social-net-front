@@ -6,6 +6,8 @@ import { removeAccessToken, parseForNewNotifications } from '../../../utils';
 import NotificationDropdown from './NotificationDropdown/NotificationIconDropdown.js';
 import Searchbar from './Searchbar/Searchbar';
 
+import { sendLog } from '../../../utils';
+
 
 class NavHeader extends React.Component {
 
@@ -30,7 +32,7 @@ class NavHeader extends React.Component {
       if (idArray.length > 0) {
         Axios.put('/notifications/alerts', { ids: idArray, update: { isRead: true } })
           .catch((err) => {
-            console.error(err);
+            sendLog(err, "connection error");
           });
       }
     }
@@ -51,7 +53,7 @@ class NavHeader extends React.Component {
       if (idArray.length > 0) {
         Axios.put('/notifications/friendRequests', { ids: idArray, update: { isRead: true } })
           .catch((err) => {
-            console.error(err);
+            sendLog(err, "connection error");
           });
       }
     }
@@ -81,7 +83,7 @@ class NavHeader extends React.Component {
         }
       })
       .catch((err) => {
-        console.error(err);
+        sendLog(err, "connection error");
       });
   }
 
@@ -97,7 +99,7 @@ class NavHeader extends React.Component {
         }
       })
       .catch((err) => {
-        console.error(err);
+        sendLog(err, "connection error");
       });
   }
 
@@ -113,11 +115,11 @@ class NavHeader extends React.Component {
     });
     Axios.put('/notifications/friendRequests', {  sender: sender, receiver: receiver, ids: [id], update: { accepted: true } })
       .catch((err) => {
-        console.error(err);
+        sendLog(err, "connection error");
       });
     Axios.put('/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "accepted" })
       .catch((err) => {
-        console.error(err);
+        sendLog(err, "connection error");
       });
   };
 
@@ -133,11 +135,11 @@ class NavHeader extends React.Component {
     });
     Axios.put('/notifications/friendRequests', { sender: sender, receiver: receiver, ids: [id], update: { declined: true } })
       .catch((err) => {
-        console.error(err);
+        sendLog(err, "connection error");
       });
     Axios.put('/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "declined" })
       .catch((err) => {
-        console.error(err);
+        sendLog(err, "connection error");
       });
   };
 

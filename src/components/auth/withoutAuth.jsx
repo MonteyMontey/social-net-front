@@ -22,8 +22,7 @@ export default function withoutAuth(ComponentToProtect) {
             throw error;
           }
         })
-        .catch(err => {
-          console.error(err);
+        .catch(_ => { 
           this.setState({ loading: false});
         });
     }

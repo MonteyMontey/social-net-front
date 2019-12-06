@@ -2,6 +2,8 @@ import React from 'react'
 import { Form, Button } from "react-bootstrap";
 import Axios from 'axios';
 
+import { sendLog } from '../../../../utils';
+
 class PostPrompt extends React.Component {
 
   submitPost = e => {
@@ -15,8 +17,8 @@ class PostPrompt extends React.Component {
         this.props.addNewPost(res.data);
         postBox.value = "";
       })
-      .catch((error) => {
-        console.log("Something went wrong", error.response);
+      .catch((err) => {
+        sendLog(err, "connection error");
       });
 
     e.preventDefault();
