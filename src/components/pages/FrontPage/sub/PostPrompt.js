@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Button } from "react-bootstrap";
 import Axios from 'axios';
 
-import { sendLog } from '../../../../utils';
+import { sendLog, consoleLog } from '../../../../utils';
 
 class PostPrompt extends React.Component {
 
@@ -13,7 +13,7 @@ class PostPrompt extends React.Component {
 
     Axios.post('/posts', post)
       .then(res => {
-        console.log("Successfully sent post to backend", res);
+        consoleLog("Successfully sent post to backend", res);
         this.props.addNewPost(res.data);
         postBox.value = "";
       })

@@ -5,7 +5,7 @@ import Axios from 'axios';
 import PostPrompt from '../../pages/FrontPage/sub/PostPrompt';
 import Post from './sub/Post';
 
-import { sendLog } from '../../../utils';
+import { sendLog, consoleLog } from '../../../utils';
 
 class ScrollFeed extends React.Component {
 
@@ -34,7 +34,7 @@ class ScrollFeed extends React.Component {
       }
     })
       .then(res => {
-        console.log(res);
+        consoleLog(res);
         if (res.data.length === 0) {
           this.setState({
             hasMore: false

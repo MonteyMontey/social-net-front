@@ -3,7 +3,7 @@ import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Axios from 'axios';
 
-import { sendLog } from '../../../../utils';
+import { sendLog, consoleLog } from '../../../../utils';
 
 class LoginHeader extends React.Component {
 
@@ -15,7 +15,7 @@ class LoginHeader extends React.Component {
 
     Axios.post('/login', loginData)
       .then(res => {
-        console.log(res);
+        consoleLog(res);
         this.props.history.push('/frontpage');
       })
       .catch((err) => {

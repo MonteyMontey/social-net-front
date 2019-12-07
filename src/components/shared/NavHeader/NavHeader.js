@@ -60,7 +60,6 @@ class NavHeader extends React.Component {
   }
 
   componentDidMount() {
-    console.log("mounted")
     this.checkForFriendRequestNotifications();
     this.checkForAlerts();
     setInterval(() => this.checkForFriendRequestNotifications(), 5000);
@@ -68,7 +67,6 @@ class NavHeader extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log("unmounted")
     clearInterval();
   }
 

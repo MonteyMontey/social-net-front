@@ -44,4 +44,6 @@ const sendLog = (log, type = "error") => {
     .catch();
 }
 
-export { removeAccessToken, timeSince, parseForNewNotifications, sendLog };
+const consoleLog = (process.env.NODE_ENV === 'development') ? console.log : () => {};
+
+export { removeAccessToken, timeSince, parseForNewNotifications, sendLog, consoleLog };

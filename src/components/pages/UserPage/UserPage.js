@@ -5,7 +5,7 @@ import ScrollFeed from '../../shared/ScrollFeed/ScrollFeed';
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Axios from 'axios';
 
-import { sendLog } from '../../../utils';
+import { sendLog, consoleLog } from '../../../utils';
 
 class UserPage extends React.Component {
 
@@ -18,7 +18,7 @@ class UserPage extends React.Component {
       personId: this.state.userID
     })
       .then(res => {
-        console.log(res);
+        consoleLog(res);
       })
       .catch((err) => {
         sendLog(err, "connection error");
@@ -40,13 +40,13 @@ class UserPage extends React.Component {
       }
     })
       .then(res => {
-        console.log(res);
+        consoleLog(res);
         this.setState({
           name: res.data.firstName + " " + res.data.lastName
         });
       })
       .catch((err) => {
-        console.error(err);
+        sendLog(err, "connection error");
       });
 
 
@@ -66,7 +66,7 @@ class UserPage extends React.Component {
         });
       })
       .catch((err) => {
-        console.error(err.response);
+        sendLog(err.response, "connection error");
       });
   }
 

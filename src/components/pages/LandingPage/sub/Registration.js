@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Axios from 'axios';
 
-import { sendLog } from '../../../../utils';
+import { sendLog, consoleLog } from '../../../../utils';
 
 
 class Registration extends React.Component {
@@ -29,7 +29,7 @@ class Registration extends React.Component {
 
       Axios.post('/users', registrationData)
         .then(res => {
-          console.log(res);
+          consoleLog(res);
           this.props.registered();
         })
         .catch((err) => {
