@@ -30,6 +30,7 @@ class UserPage extends React.Component {
   };
 
   componentDidMount() {
+
     this.setState({
       userID: this.props.match.params.userId
     });
