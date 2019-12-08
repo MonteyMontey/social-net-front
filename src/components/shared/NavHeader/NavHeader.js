@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Form, Nav, Dropdown } from 'react-bootstrap';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import { removeAccessToken, parseForNewNotifications } from '../../../utils';
 import NotificationDropdown from './NotificationDropdown/NotificationIconDropdown.js';
@@ -144,7 +145,9 @@ class NavHeader extends React.Component {
   render() {
     return (
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand className="ml-sm-5" style={this.styles.logo} href="/frontpage">Social-Network</Navbar.Brand>
+        <Link to="/frontpage">
+          <Navbar.Brand className="ml-sm-5" style={this.styles.logo}>Social-Network</Navbar.Brand>
+        </Link>
         <Form inline>
             <Searchbar></Searchbar>
         </Form>

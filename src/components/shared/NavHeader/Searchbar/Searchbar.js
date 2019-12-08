@@ -68,6 +68,7 @@ class Searchbar extends React.Component {
 
   userSelected = (_, { suggestion }) => {
     this.props.history.push(`/user/${suggestion._id}`);
+    window.location.reload();
   };
 
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 import { timeSince } from '../../../../utils';
 
@@ -8,9 +9,9 @@ const Post = (props) => {
     <Card style={styles.card}>
       <Card.Body>
         <Card.Title>
-          <a style={{ color: "inherit" }} href={`/user/${props.userId}`}>
+          <Link style={{ color: "inherit" }} to={`/user/${props.userId}`}>
             {props.firstName + " " + props.lastName}
-          </a>
+          </Link>
         </Card.Title>
         <Card.Text>
           {props.body}

@@ -17,6 +17,9 @@ class LoginHeader extends React.Component {
       .then(res => {
         consoleLog(res);
         this.props.history.push('/frontpage');
+        this.setState({
+          loggedIn: true
+        });
       })
       .catch((err) => {
         // wrong credentials

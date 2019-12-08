@@ -12,7 +12,7 @@ import ErrorBoundary from './components/boundaries/ErrorBoundary';
 function App() {
   return (
     <ErrorBoundary>
-      <Router forceRefresh={true}>
+      <Router>
         <Switch>
           <Route path="/" component={withoutAuth(Landing)} exact />
           <Route path="/frontpage" component={withAuth(Home)} exact />
