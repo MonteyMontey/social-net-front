@@ -3,7 +3,8 @@ import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Axios from 'axios';
 
-import { sendLog, consoleLog } from '../../../../utils';
+import { sendLog, consoleLog } from '../../../../../utils';
+import './LoginHeader.css';
 
 class LoginHeader extends React.Component {
 
@@ -41,20 +42,20 @@ class LoginHeader extends React.Component {
           <Container>
             <Navbar.Brand style={this.styles.logo} href="#home">Social-Network</Navbar.Brand>
             <Form onSubmit={this.login} inline>
-              <FormControl maxLength="254"
+              <FormControl style={{maxWidth: "250px"}} maxLength="254"
                 id="email"
                 type="email"
                 placeholder="Email"
-                className=" mr-sm-2" />
-              <FormControl minLength="8"
+                className="mr-sm-2" />
+              <FormControl style={{maxWidth: "250px"}} minLength="8"
                 maxLength="25"
                 pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
                 title="[a-zA-Z0-9_$!%^*#/\()?]*"
                 id="password"
                 type="password"
                 placeholder="Password"
-                className=" mr-sm-2" />
-              <Button type="submit">Log In</Button>
+                className="mr-sm-2" />
+              <Button id="login" type="submit">Log In</Button>
             </Form>
           </Container>
         </Navbar>

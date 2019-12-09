@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import LoginHeader from './sub/LoginHeader';
+import LoginHeader from './sub/LoginHeader/LoginHeader';
 import Registration from './sub/Registration';
 import {
   PasswordsDontMatchAlert,
