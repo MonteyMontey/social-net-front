@@ -45,7 +45,7 @@ class LandingPage extends React.Component {
           showAlert={this.showPasswordsDontMatchAlert} /> : null}
 
         <Registration
-          registered={() => this.props.history.push('/frontpage')}
+          registered={() => this.props.history.push('/confirm')}
           showSomethingWentWrongAlert={this.showSomethingWentWrongAlert}
           showPasswordsDontMatchAlert={this.showPasswordsDontMatchAlert} />
       </React.Fragment>
