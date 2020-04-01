@@ -34,10 +34,26 @@ const SomethingWentWrongAlert = (props) => {
   );
 };
 
+
+const EmailVerificationAlert = (props) => {
+  return (
+    <Alert 
+      style={styles.alertMargin} 
+      variant="success"
+      dismissible
+      onClose={() => props.showAlert(false)}>
+      <Alert.Heading>We've sent you an email!</Alert.Heading>
+      <p>
+        Please check your email and verify your account. If you don't see our email, check your junk folder. 
+      </p>
+    </Alert>
+  );
+};
+
 const styles = {
   alertMargin: {
     margin: "0px"
   }
 };
 
-export { LoginFailedAlert, PasswordsDontMatchAlert, SomethingWentWrongAlert };
+export { LoginFailedAlert, PasswordsDontMatchAlert, SomethingWentWrongAlert, EmailVerificationAlert };

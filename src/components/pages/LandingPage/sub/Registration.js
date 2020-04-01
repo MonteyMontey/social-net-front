@@ -30,7 +30,7 @@ class Registration extends React.Component {
       Axios.post('/users', registrationData)
         .then(res => {
           consoleLog(res);
-          this.props.registered();
+          this.props.showEmailVerificationAlert(true);
         })
         .catch((err) => {
           this.props.showSomethingWentWrongAlert(true);
