@@ -40,7 +40,8 @@ class LandingPage extends React.Component {
     return (
       <React.Fragment>
 
-        <LoginHeader showLoginFailedAlert={this.showLoginFailedAlert} />
+        <LoginHeader showLoginFailedAlert={this.showLoginFailedAlert}
+          showEmailVerificationAlert={this.showEmailVerificationAlert} />
 
         {this.state.emailVerificationAlert ? <EmailVerificationAlert
           showAlert={this.showEmailVerificationAlert} /> : null}
