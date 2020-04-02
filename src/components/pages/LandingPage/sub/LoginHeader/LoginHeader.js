@@ -13,7 +13,7 @@ class LoginHeader extends React.Component {
     let loginData = {}
     loginData.email = e.target.email.value;
     loginData.password = e.target.password.value;
-
+        
     Axios.post('/login', loginData)
       .then(res => {
         consoleLog(res);
@@ -23,9 +23,12 @@ class LoginHeader extends React.Component {
         });
       })
       .catch((err) => {
-        // wrong credentials
         if (err.response) {
-          this.props.showLoginFailedAlert(true);
+          if (err.response.status === 403){
+            this.props.showEmailVerificationAlert(true); // account not active
+          } else {
+            this.props.showLoginFailedAlert(true); // wrong credentials
+          }
         } else if (err.request) { // no connection from backend
           this.props.showLoginFailedAlert(true);
           sendLog(err, "connection error");

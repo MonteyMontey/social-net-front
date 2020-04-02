@@ -6,7 +6,8 @@ import Registration from './sub/Registration';
 import {
   PasswordsDontMatchAlert,
   LoginFailedAlert,
-  SomethingWentWrongAlert
+  SomethingWentWrongAlert,
+  EmailVerificationAlert
 } from '../../shared/Alerts';
 
 
@@ -15,7 +16,8 @@ class LandingPage extends React.Component {
   state = {
     passwordsDontMatchAlert: false,
     somethingWentWrongAlert: false,
-    loginFailedAlert: false
+    loginFailedAlert: false,
+    emailVerificationAlert: false
   };
 
   showPasswordsDontMatchAlert = (show) => {
@@ -30,10 +32,19 @@ class LandingPage extends React.Component {
     this.setState({ loginFailedAlert: show });
   };
 
+  showEmailVerificationAlert = (show) => {
+    this.setState({ emailVerificationAlert: show });
+  }
+
   render() {
     return (
       <React.Fragment>
-        <LoginHeader showLoginFailedAlert={this.showLoginFailedAlert} />
+
+        <LoginHeader showLoginFailedAlert={this.showLoginFailedAlert}
+          showEmailVerificationAlert={this.showEmailVerificationAlert} />
+
+        {this.state.emailVerificationAlert ? <EmailVerificationAlert
+          showAlert={this.showEmailVerificationAlert} /> : null}
 
         {this.state.loginFailedAlert ? <LoginFailedAlert
           showAlert={this.showLoginFailedAlert} /> : null}
@@ -45,9 +56,9 @@ class LandingPage extends React.Component {
           showAlert={this.showPasswordsDontMatchAlert} /> : null}
 
         <Registration
-          registered={() => this.props.history.push('/frontpage')}
           showSomethingWentWrongAlert={this.showSomethingWentWrongAlert}
-          showPasswordsDontMatchAlert={this.showPasswordsDontMatchAlert} />
+          showPasswordsDontMatchAlert={this.showPasswordsDontMatchAlert}
+          showEmailVerificationAlert={this.showEmailVerificationAlert} />
       </React.Fragment>
     );
   }
