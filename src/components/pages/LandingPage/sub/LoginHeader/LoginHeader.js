@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container, Form, FormControl, Button } from 'react-bootstrap';
+import { Modal, Navbar, Container, Form, FormControl, Button, Col } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import Axios from 'axios';
 
@@ -7,6 +7,27 @@ import { sendLog, consoleLog } from '../../../../../utils';
 import './LoginHeader.css';
 
 class LoginHeader extends React.Component {
+
+  state = {
+    show: false
+  }
+
+  handleClose = () => this.setState({show: false});
+  handleShow = () => this.setState({show: true});
+
+  sendPasswordResetEmail = e => {
+    const data = {email: e.target.email.value}
+
+    Axios.post('/reset-password', data)
+      .then(_ => {
+        this.handleClose();
+      })
+      .catch(err => {
+        sendLog(err, "connection error");
+      });
+
+    e.preventDefault();
+  }
 
   login = e => {
 
@@ -41,6 +62,40 @@ class LoginHeader extends React.Component {
   render() {
     return (
       <React.Fragment>
+
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Reset Password</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Please enter your email address. We'll send you a link to reset your password via email.</p>
+
+            <Form onSubmit={this.sendPasswordResetEmail}>
+              <Form.Row>
+                <Form.Group as={Col} controlId="email">
+                  <Form.Control required
+                      style={{ width: "100%" }}
+                      type="email"
+                      placeholder="Email"
+                      maxLength="254" />
+                </Form.Group>
+              </Form.Row>
+            
+            <hr></hr>
+
+            <div style={{float: "right"}}>
+              <Button style={{marginRight: "10px"}} variant="secondary" onClick={this.handleClose}>
+                Cancel
+              </Button>
+              <Button type="submit" variant="primary">
+                Send
+              </Button>
+            </div>
+
+            </Form>
+          </Modal.Body>
+        </Modal>
+
         <Navbar style={this.styles.navbar} bg="dark" variant="dark">
           <Container>
             <Navbar.Brand style={this.styles.logo} href="#home">Social-Network</Navbar.Brand>
@@ -60,6 +115,7 @@ class LoginHeader extends React.Component {
                 className="mr-sm-2" />
               <Button id="login" type="submit">Log In</Button>
             </Form>
+            <Button style={{textDecoration: "none"}} onClick={this.handleShow} variant="link">Forgot your password?</Button>
           </Container>
         </Navbar>
       </React.Fragment>
