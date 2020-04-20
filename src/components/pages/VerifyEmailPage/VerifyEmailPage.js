@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Alert } from "react-bootstrap";
+import { Container, Alert, Navbar } from "react-bootstrap";
 import Axios from 'axios';
 
 
@@ -78,6 +78,12 @@ class VerifyEmailPage extends React.Component {
 
     return (
       <React.Fragment>
+        <Navbar style={{padding: '10px'}} bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand style={{fontSize: '30px'}} href="#home">Social-Network</Navbar.Brand>
+          </Container>
+        </Navbar>
+
         {typeof this.state.activationCodeValid !== 'undefined' ? this.state.activationCodeValid ?
          <AccountActivatedInfo /> : <InvalidInfo/> : <SomethingWentWrongAlert/> }
       </React.Fragment>
