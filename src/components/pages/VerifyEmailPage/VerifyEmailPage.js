@@ -8,7 +8,7 @@ import { sendLog } from '../../../utils';
 class VerifyEmailPage extends React.Component {
 
   state = {
-
+    showSomethingWentWrong: false
   }
 
   componentDidMount() {
@@ -30,6 +30,9 @@ class VerifyEmailPage extends React.Component {
             });
           }
         } else { // no connection from backend
+          this.setState({
+            showSomethingWentWrong: true
+          });
           sendLog(err, "connection error");
         }
 
@@ -68,7 +71,7 @@ class VerifyEmailPage extends React.Component {
 
     const SomethingWentWrongAlert = () => {
       return (
-        <Alert style={{margin: "0px"}}
+        <Alert style={{ margin: "0px" }}
           variant="danger">
           Oops, something went wrong! Please try again.
         </Alert>
@@ -78,14 +81,14 @@ class VerifyEmailPage extends React.Component {
 
     return (
       <React.Fragment>
-        <Navbar style={{padding: '10px'}} bg="dark" variant="dark">
+        <Navbar style={{ padding: '10px' }} bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand style={{fontSize: '30px'}} href="#home">Social-Network</Navbar.Brand>
+            <Navbar.Brand style={{ fontSize: '30px' }} href="#home">Social-Network</Navbar.Brand>
           </Container>
         </Navbar>
-
+        {this.state.showSomethingWentWrong ? <SomethingWentWrongAlert /> : null}
         {typeof this.state.activationCodeValid !== 'undefined' ? this.state.activationCodeValid ?
-         <AccountActivatedInfo /> : <InvalidInfo/> : <SomethingWentWrongAlert/> }
+          <AccountActivatedInfo /> : <InvalidInfo /> : null}
       </React.Fragment>
     );
   }
