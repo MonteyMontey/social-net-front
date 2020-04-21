@@ -106,7 +106,7 @@ class LoginHeader extends React.Component {
                 placeholder="Email"
                 className="mr-sm-2" />
               <FormControl style={{maxWidth: "250px"}} minLength="8"
-                maxLength="25"
+                maxLength="256"
                 pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
                 title="[a-zA-Z0-9_$!%^*#/\()?]*"
                 id="password"
