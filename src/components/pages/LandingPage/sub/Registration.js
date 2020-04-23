@@ -32,9 +32,9 @@ class Registration extends React.Component {
           consoleLog(res);
           this.props.showEmailVerificationAlert(true);
         })
-        .catch((err) => {
-          this.props.showSomethingWentWrongAlert(true);
-          sendLog(err, "connection error");
+        .catch(err => {
+          this.props.showSomethingWentWrongAlert(true, err.response.data.message);
+          sendLog(err, "registration error");
         });
     }
 

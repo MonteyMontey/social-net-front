@@ -16,6 +16,7 @@ class LandingPage extends React.Component {
   state = {
     passwordsDontMatchAlert: false,
     somethingWentWrongAlert: false,
+    somethingWentWrongMessage: "",
     loginFailedAlert: false,
     emailVerificationAlert: false
   };
@@ -24,8 +25,11 @@ class LandingPage extends React.Component {
     this.setState({ passwordsDontMatchAlert: show });
   };
 
-  showSomethingWentWrongAlert = (show) => {
-    this.setState({ somethingWentWrongAlert: show });
+  showSomethingWentWrongAlert = (show, message) => {
+    this.setState({ 
+      somethingWentWrongAlert: show,
+      somethingWentWrongMessage: message
+    });
   };
 
   showLoginFailedAlert = (show) => {
@@ -50,7 +54,7 @@ class LandingPage extends React.Component {
           showAlert={this.showLoginFailedAlert} /> : null}
 
         {this.state.somethingWentWrongAlert ? <SomethingWentWrongAlert
-          showAlert={this.showSomethingWentWrongAlert} /> : null}
+          showAlert={this.showSomethingWentWrongAlert} message={this.state.somethingWentWrongMessage} /> : null}
 
         {this.state.passwordsDontMatchAlert ? <PasswordsDontMatchAlert
           showAlert={this.showPasswordsDontMatchAlert} /> : null}
