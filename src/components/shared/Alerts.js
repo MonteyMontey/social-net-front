@@ -29,7 +29,7 @@ const SomethingWentWrongAlert = (props) => {
       dismissible
       onClose={() => props.showAlert(false)}
       variant="danger">
-      Oops, something went wrong! Please try again.
+      Oops, something went wrong! {props.message}
     </Alert>
   );
 };
