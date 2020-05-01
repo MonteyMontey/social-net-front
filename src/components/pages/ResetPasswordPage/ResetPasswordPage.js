@@ -81,7 +81,7 @@ class ResetPasswordPage extends React.Component {
                   type="password"
                   placeholder="New password"
                   minLength="8"
-                  maxLength="256"
+                  maxLength="72"
                   pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
                   title="[a-zA-Z0-9_$!%^*#/\()?]*" />
               </Form.Group>
@@ -91,7 +91,7 @@ class ResetPasswordPage extends React.Component {
                   type="password"
                   placeholder="Repeat new password"
                   minLength="8"
-                  maxLength="256"
+                  maxLength="72"
                   pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
                   title="[a-zA-Z0-9_$!%^*#/\()?]*" />
               </Form.Group>

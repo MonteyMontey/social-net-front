@@ -87,7 +87,7 @@ class Registration extends React.Component {
                   type="password"
                   placeholder="Password"
                   minLength="8"
-                  maxLength="256"
+                  maxLength="72"
                   pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
                   title="[a-zA-Z0-9_$!%^*#/\()?]*" />
               </Form.Group>
@@ -97,7 +97,7 @@ class Registration extends React.Component {
                   type="password"
                   placeholder="Repeat password"
                   minLength="8"
-                  maxLength="256"
+                  maxLength="72"
                   pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
                   title="[a-zA-Z0-9_$!%^*#/\()?]*" />
               </Form.Group>
