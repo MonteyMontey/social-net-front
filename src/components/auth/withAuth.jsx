@@ -13,7 +13,7 @@ export default function withAuth(ComponentToProtect) {
     }
 
     componentDidMount() {
-      fetch('/checkToken')
+      fetch(process.env.REACT_APP_NODE_URL + '/checkToken')
         .then(res => {
           if (res.status === 200) {
             this.setState({ loading: false });

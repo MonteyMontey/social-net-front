@@ -12,7 +12,7 @@ class VerifyEmailPage extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get('/activate-account', {
+    Axios.get(process.env.REACT_APP_NODE_URL + '/activate-account', {
       params: {
         activationCode: this.props.match.params.activationCode
       }

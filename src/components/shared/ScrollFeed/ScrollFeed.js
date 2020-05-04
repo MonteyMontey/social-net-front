@@ -26,7 +26,7 @@ class ScrollFeed extends React.Component {
   };
 
   fetchPosts = () => {
-    Axios.get('/posts', {
+    Axios.get(process.env.REACT_APP_NODE_URL + '/posts', {
       params: {
         oldestFetchedPostID: this.state.oldestFetchedPostID,
         numberOfPostsToFetch: this.state.numberOfPostsToFetch,

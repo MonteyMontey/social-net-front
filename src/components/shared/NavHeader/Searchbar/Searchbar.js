@@ -31,7 +31,7 @@ class Searchbar extends React.Component {
   getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
 
-    Axios.get('/users/textsearch', {
+    Axios.get(process.env.REACT_APP_NODE_URL + '/users/textsearch', {
       params: {
         inputValue: inputValue
       }

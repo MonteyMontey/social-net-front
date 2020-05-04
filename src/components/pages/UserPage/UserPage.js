@@ -14,7 +14,7 @@ class UserPage extends React.Component {
   }
 
   sendFriendRequest = () => {
-    Axios.post('/neo4j/friendRequest', {
+    Axios.post(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', {
       personId: this.state.userID
     })
       .then(res => {
@@ -35,7 +35,7 @@ class UserPage extends React.Component {
       userID: this.props.match.params.userId
     });
 
-    Axios.get('/users', {
+    Axios.get(process.env.REACT_APP_NODE_URL + '/users', {
       params: {
         id: this.props.match.params.userId
       }
@@ -51,7 +51,7 @@ class UserPage extends React.Component {
       });
 
 
-    Axios.get('/neo4j/relationToPerson', {
+    Axios.get(process.env.REACT_APP_NODE_URL + '/neo4j/relationToPerson', {
       params: {
         personId: this.props.match.params.userId
       }

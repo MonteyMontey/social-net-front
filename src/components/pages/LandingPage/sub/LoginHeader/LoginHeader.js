@@ -18,7 +18,7 @@ class LoginHeader extends React.Component {
   sendPasswordResetEmail = e => {
     const data = {email: e.target.email.value}
 
-    Axios.post('/reset-password', data)
+    Axios.post(process.env.REACT_APP_NODE_URL + '/reset-password', data)
       .then(_ => {
         this.handleClose();
       })
@@ -35,7 +35,7 @@ class LoginHeader extends React.Component {
     loginData.email = e.target.email.value;
     loginData.password = e.target.password.value;
         
-    Axios.post('/login', loginData)
+    Axios.post(process.env.REACT_APP_NODE_URL + '/login', loginData)
       .then(res => {
         consoleLog(res);
         this.props.history.push('/frontpage');

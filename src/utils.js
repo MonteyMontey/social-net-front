@@ -40,7 +40,7 @@ const parseForNewNotifications = (notifications) => {
 }
 
 const sendLog = (log, type = "error") => {
-  Axios.post('http://localhost:5555/logs', { log, type })
+  Axios.post(process.env.REACT_APP_LOGS_URL + '/logs', { log, type })
     .catch();
 }
 

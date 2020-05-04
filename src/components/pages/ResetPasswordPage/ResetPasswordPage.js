@@ -29,7 +29,7 @@ class ResetPasswordPage extends React.Component {
       this.showPasswordsDontMatchAlert(true);
     }
 
-    Axios.put('/reset-password', { newPassword: password, resetIDHash: this.state.resetIDHash })
+    Axios.put(process.env.REACT_APP_NODE_URL + '/reset-password', { newPassword: password, resetIDHash: this.state.resetIDHash })
       .then(res => {
         this.setState({
           confirmationAlert: true
@@ -43,7 +43,7 @@ class ResetPasswordPage extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get('/reset-password', {
+    Axios.get(process.env.REACT_APP_NODE_URL + '/reset-password', {
       params: {
         resetID: this.props.match.params.resetID
       }
