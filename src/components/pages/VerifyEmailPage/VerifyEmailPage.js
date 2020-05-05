@@ -16,7 +16,7 @@ class VerifyEmailPage extends React.Component {
       params: {
         activationCode: this.props.match.params.activationCode
       }
-    })
+    }, { withCredentials: true })
       .then(_ => {
         this.setState({
           activationCodeValid: true

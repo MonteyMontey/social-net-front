@@ -13,7 +13,7 @@ export default function withoutAuth(ComponentToProtect) {
     }
 
     componentDidMount() {
-      fetch(process.env.REACT_APP_NODE_URL + '/checkToken')
+      fetch(process.env.REACT_APP_NODE_URL + '/checkToken', {credentials: 'include'})
         .then(res => {
           if (res.status === 200) {
             this.setState({ loading: false, redirect: true });

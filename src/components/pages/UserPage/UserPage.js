@@ -14,9 +14,7 @@ class UserPage extends React.Component {
   }
 
   sendFriendRequest = () => {
-    Axios.post(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', {
-      personId: this.state.userID
-    })
+    Axios.post(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { personId: this.state.userID }, {withCredentials: true})
       .then(res => {
         consoleLog(res);
       })

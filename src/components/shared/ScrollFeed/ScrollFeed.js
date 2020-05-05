@@ -32,7 +32,7 @@ class ScrollFeed extends React.Component {
         numberOfPostsToFetch: this.state.numberOfPostsToFetch,
         userID: this.props.userID
       }
-    })
+    }, {credentials: 'include'})
       .then(res => {
         consoleLog(res);
         if (res.data.length === 0) {

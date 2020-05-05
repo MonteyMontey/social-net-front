@@ -29,7 +29,7 @@ class ResetPasswordPage extends React.Component {
       this.showPasswordsDontMatchAlert(true);
     }
 
-    Axios.put(process.env.REACT_APP_NODE_URL + '/reset-password', { newPassword: password, resetIDHash: this.state.resetIDHash })
+    Axios.put(process.env.REACT_APP_NODE_URL + '/reset-password', { newPassword: password, resetIDHash: this.state.resetIDHash }, {withCredentials: true})
       .then(res => {
         this.setState({
           confirmationAlert: true

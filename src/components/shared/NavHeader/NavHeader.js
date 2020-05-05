@@ -31,7 +31,7 @@ class NavHeader extends React.Component {
         });
 
       if (idArray.length > 0) {
-        Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/alerts', { ids: idArray, update: { isRead: true } })
+        Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/alerts', { ids: idArray, update: { isRead: true } }, {withCredentials: true})
           .catch((err) => {
             sendLog(err, "connection error");
           });
@@ -52,7 +52,7 @@ class NavHeader extends React.Component {
         });
 
       if (idArray.length > 0) {
-        Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { ids: idArray, update: { isRead: true } })
+        Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { ids: idArray, update: { isRead: true } }, {withCredentials: true})
           .catch((err) => {
             sendLog(err, "connection error");
           });
@@ -72,7 +72,7 @@ class NavHeader extends React.Component {
   }
 
   checkForAlerts = () => {
-    Axios.get(process.env.REACT_APP_NODE_URL + '/notifications/alerts')
+    Axios.get(process.env.REACT_APP_NODE_URL + '/notifications/alerts', {withCredentials: true})
       .then(res => {
         this.setState({ alerts: res.data });
         if (res.data.length > 0 && parseForNewNotifications(res.data)) {
@@ -87,7 +87,7 @@ class NavHeader extends React.Component {
   }
 
   checkForFriendRequestNotifications = () => {
-    Axios.get(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests')
+    Axios.get(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', {withCredentials: true})
       .then(res => {
         this.setState({ friendRequests: res.data });
 
@@ -112,11 +112,11 @@ class NavHeader extends React.Component {
     this.setState({
       friendRequests: updatedFriendRequests
     });
-    Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', {  sender: sender, receiver: receiver, ids: [id], update: { accepted: true } })
+    Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', {  sender: sender, receiver: receiver, ids: [id], update: { accepted: true } }, {withCredentials: true})
       .catch((err) => {
         sendLog(err, "connection error");
       });
-    Axios.put(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "accepted" })
+    Axios.put(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "accepted" }, {withCredentials: true})
       .catch((err) => {
         sendLog(err, "connection error");
       });
@@ -132,11 +132,11 @@ class NavHeader extends React.Component {
     this.setState({
       friendRequests: updatedFriendRequests
     });
-    Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { sender: sender, receiver: receiver, ids: [id], update: { declined: true } })
+    Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { sender: sender, receiver: receiver, ids: [id], update: { declined: true } }, {withCredentials: true})
       .catch((err) => {
         sendLog(err, "connection error");
       });
-    Axios.put(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "declined" })
+    Axios.put(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "declined" }, {withCredentials: true})
       .catch((err) => {
         sendLog(err, "connection error");
       });

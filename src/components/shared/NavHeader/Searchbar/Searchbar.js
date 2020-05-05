@@ -35,7 +35,7 @@ class Searchbar extends React.Component {
       params: {
         inputValue: inputValue
       }
-    })
+    }, {withCredentials: true})
       .then(res => {
         this.setState({
           suggestions: res.data

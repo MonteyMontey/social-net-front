@@ -27,7 +27,7 @@ class Registration extends React.Component {
       registrationData.birthday = form.datePicker.value;
       registrationData.gender = this.state.gender;
 
-      Axios.post(process.env.REACT_APP_NODE_URL + '/users', registrationData)
+      Axios.post(process.env.REACT_APP_NODE_URL + '/users', registrationData, {withCredentials: true})
         .then(res => {
           consoleLog(res);
           this.props.showEmailVerificationAlert(true);

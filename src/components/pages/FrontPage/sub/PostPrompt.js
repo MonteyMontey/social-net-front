@@ -11,7 +11,7 @@ class PostPrompt extends React.Component {
     let post = {};
     post.body = postBox.value;
 
-    Axios.post(process.env.REACT_APP_NODE_URL + '/posts', post)
+    Axios.post(process.env.REACT_APP_NODE_URL + '/posts', post, {withCredentials: true})
       .then(res => {
         consoleLog("Successfully sent post to backend", res);
         this.props.addNewPost(res.data);
