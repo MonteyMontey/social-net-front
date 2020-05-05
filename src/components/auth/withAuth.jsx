@@ -18,8 +18,8 @@ export default function withAuth(ComponentToProtect) {
           if (res.status === 200) {
             this.setState({ loading: false });
           } else {
-            const error = new Error(res.error);
-            throw error;
+            //const error = new Error(res.error);
+            //throw error;
           }
         })
         .catch(err => {
