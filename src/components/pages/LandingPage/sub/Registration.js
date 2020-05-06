@@ -89,7 +89,8 @@ class Registration extends React.Component {
                   minLength="8"
                   maxLength="72"
                   pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
-                  title="[a-zA-Z0-9_$!%^*#/\()?]*" />
+                  title="[a-zA-Z0-9_$!%^*#/\()?]*"
+                  autocomplete="on" />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridRepeatPassword">
@@ -99,7 +100,8 @@ class Registration extends React.Component {
                   minLength="8"
                   maxLength="72"
                   pattern="[a-zA-Z0-9_$!%^*#/\()?]*"
-                  title="[a-zA-Z0-9_$!%^*#/\()?]*" />
+                  title="[a-zA-Z0-9_$!%^*#/\()?]*"
+                  autocomplete="on" />
               </Form.Group>
             </Form.Row>
 

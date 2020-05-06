@@ -112,7 +112,8 @@ class LoginHeader extends React.Component {
                 id="password"
                 type="password"
                 placeholder="Password"
-                className="mr-sm-2" />
+                className="mr-sm-2"
+                autocomplete="on" />
               <Button id="login" type="submit">Log In</Button>
             </Form>
             <Button style={{textDecoration: "none"}} onClick={this.handleShow} variant="link">Forgot your password?</Button>
