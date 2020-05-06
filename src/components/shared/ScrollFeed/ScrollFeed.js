@@ -31,8 +31,9 @@ class ScrollFeed extends React.Component {
         oldestFetchedPostID: this.state.oldestFetchedPostID,
         numberOfPostsToFetch: this.state.numberOfPostsToFetch,
         userID: this.props.userID
-      }
-    }, {credentials: 'include'})
+      },
+      withCredentials: true
+    })
       .then(res => {
         consoleLog(res);
         if (res.data.length === 0) {
@@ -53,7 +54,7 @@ class ScrollFeed extends React.Component {
   render() {
     return (
       <InfiniteScroll
-        style={{scrollbarWidth: "none", ...this.props.style}}
+        style={{ scrollbarWidth: "none", ...this.props.style }}
         dataLength={this.state.posts.length}
         next={this.fetchPosts}
         hasMore={this.state.hasMore}
