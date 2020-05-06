@@ -14,7 +14,7 @@ class UserPage extends React.Component {
   }
 
   sendFriendRequest = () => {
-    Axios.post(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { personId: this.state.userID }, {withCredentials: true})
+    Axios.post(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { personId: this.state.userID }, { withCredentials: true })
       .then(res => {
         consoleLog(res);
       })
@@ -36,7 +36,8 @@ class UserPage extends React.Component {
     Axios.get(process.env.REACT_APP_NODE_URL + '/users', {
       params: {
         id: this.props.match.params.userId
-      }
+      },
+      withCredentials: true
     })
       .then(res => {
         consoleLog(res);
@@ -52,7 +53,8 @@ class UserPage extends React.Component {
     Axios.get(process.env.REACT_APP_NODE_URL + '/neo4j/relationToPerson', {
       params: {
         personId: this.props.match.params.userId
-      }
+      },
+      withCredentials: true
     })
       .then(res => {
         if (res.data === "FriendRequest" || res.data === "Friends") {
@@ -101,12 +103,12 @@ class UserPage extends React.Component {
               <img style={this.styles.profileImage} alt="profile" src={userProfile} />
               <div style={this.styles.profileDescription}>
                 <h1>{this.state.name}</h1>
-                {this.state.relation === "Friends" ?  <FriendsButton /> : <FriendRequestButton />}
+                {this.state.relation === "Friends" ? <FriendsButton /> : <FriendRequestButton />}
               </div>
             </Col>
             <Col xs={5}>
               <div style={this.styles.scrollFeed}>
-                <ScrollFeed style={{height: "85vh"}} userID={this.props.match.params.userId} />
+                <ScrollFeed style={{ height: "85vh" }} userID={this.props.match.params.userId} />
               </div>
             </Col>
             <Col />
