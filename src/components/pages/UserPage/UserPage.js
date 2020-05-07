@@ -4,6 +4,7 @@ import NavHeader from '../../shared/NavHeader/NavHeader';
 import ScrollFeed from '../../shared/ScrollFeed/ScrollFeed';
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 import { sendLog, consoleLog } from '../../../utils';
 
@@ -137,4 +138,4 @@ class UserPage extends React.Component {
   };
 }
 
-export default UserPage;
+export default withRouter(UserPage);

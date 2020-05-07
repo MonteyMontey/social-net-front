@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navbar, Form, Nav, Dropdown } from 'react-bootstrap';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-import { removeAccessToken, parseForNewNotifications } from '../../../utils';
+import { parseForNewNotifications } from '../../../utils';
 import NotificationDropdown from './NotificationDropdown/NotificationIconDropdown.js';
 import Searchbar from './Searchbar/Searchbar';
 
@@ -18,6 +18,20 @@ class NavHeader extends React.Component {
     alerts: []
   }
 
+  removeAccessToken = () => {
+    //cookie.remove('token', { path: '/', domain: '.social-net.tech' });
+
+    Axios.get(process.env.REACT_APP_NODE_URL + '/logout', { withCredentials: true })
+      .then(() => {
+        clearInterval(this.state.idAlert);
+        clearInterval(this.state.idFriendRequest);
+        this.props.history.push('/');
+      })
+      .catch(() => {
+        // show logout failed message
+      });
+  };
+
   toggleAlertDropdown = (show) => {
     if (show) {
       this.setState({
@@ -31,7 +45,7 @@ class NavHeader extends React.Component {
         });
 
       if (idArray.length > 0) {
-        Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/alerts', { ids: idArray, update: { isRead: true } }, {withCredentials: true})
+        Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/alerts', { ids: idArray, update: { isRead: true } }, { withCredentials: true })
           .catch((err) => {
             sendLog(err, "connection error");
           });
@@ -52,7 +66,7 @@ class NavHeader extends React.Component {
         });
 
       if (idArray.length > 0) {
-        Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { ids: idArray, update: { isRead: true } }, {withCredentials: true})
+        Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { ids: idArray, update: { isRead: true } }, { withCredentials: true })
           .catch((err) => {
             sendLog(err, "connection error");
           });
@@ -63,8 +77,12 @@ class NavHeader extends React.Component {
   componentDidMount() {
     this.checkForFriendRequestNotifications();
     this.checkForAlerts();
-    setInterval(() => this.checkForFriendRequestNotifications(), 5000);
-    setInterval(() => this.checkForAlerts(), 5000);
+    const idFriendRequest = setInterval(() => this.checkForFriendRequestNotifications(), 5000);
+    const idAlert = setInterval(() => this.checkForAlerts(), 5000);
+    this.setState({
+      idFriendRequest: idFriendRequest,
+      idAlert: idAlert
+    });
   }
 
   componentWillUnmount() {
@@ -72,7 +90,7 @@ class NavHeader extends React.Component {
   }
 
   checkForAlerts = () => {
-    Axios.get(process.env.REACT_APP_NODE_URL + '/notifications/alerts', {withCredentials: true})
+    Axios.get(process.env.REACT_APP_NODE_URL + '/notifications/alerts', { withCredentials: true })
       .then(res => {
         this.setState({ alerts: res.data });
         if (res.data.length > 0 && parseForNewNotifications(res.data)) {
@@ -87,7 +105,7 @@ class NavHeader extends React.Component {
   }
 
   checkForFriendRequestNotifications = () => {
-    Axios.get(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', {withCredentials: true})
+    Axios.get(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { withCredentials: true })
       .then(res => {
         this.setState({ friendRequests: res.data });
 
@@ -112,11 +130,11 @@ class NavHeader extends React.Component {
     this.setState({
       friendRequests: updatedFriendRequests
     });
-    Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', {  sender: sender, receiver: receiver, ids: [id], update: { accepted: true } }, {withCredentials: true})
+    Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { sender: sender, receiver: receiver, ids: [id], update: { accepted: true } }, { withCredentials: true })
       .catch((err) => {
         sendLog(err, "connection error");
       });
-    Axios.put(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "accepted" }, {withCredentials: true})
+    Axios.put(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "accepted" }, { withCredentials: true })
       .catch((err) => {
         sendLog(err, "connection error");
       });
@@ -132,11 +150,11 @@ class NavHeader extends React.Component {
     this.setState({
       friendRequests: updatedFriendRequests
     });
-    Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { sender: sender, receiver: receiver, ids: [id], update: { declined: true } }, {withCredentials: true})
+    Axios.put(process.env.REACT_APP_NODE_URL + '/notifications/friendRequests', { sender: sender, receiver: receiver, ids: [id], update: { declined: true } }, { withCredentials: true })
       .catch((err) => {
         sendLog(err, "connection error");
       });
-    Axios.put(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "declined" }, {withCredentials: true})
+    Axios.put(process.env.REACT_APP_NODE_URL + '/neo4j/friendRequest', { sender: sender, receiver: receiver, status: "declined" }, { withCredentials: true })
       .catch((err) => {
         sendLog(err, "connection error");
       });
@@ -149,7 +167,7 @@ class NavHeader extends React.Component {
           <Navbar.Brand className="ml-sm-5" style={this.styles.logo}>Social-Network</Navbar.Brand>
         </Link>
         <Form inline>
-            <Searchbar></Searchbar>
+          <Searchbar></Searchbar>
         </Form>
         <Nav className="ml-auto mr-sm-5">
           <NotificationDropdown
@@ -161,18 +179,18 @@ class NavHeader extends React.Component {
             friendRequestAccepted={this.friendRequestAccepted}
             friendRequestDeclined={this.friendRequestDeclined} />
           <NotificationDropdown notifications={[]} id="messages" iconClass="fas fa-comments fa-lg" />
-          <NotificationDropdown 
-            notifications={this.state.alerts} 
+          <NotificationDropdown
+            notifications={this.state.alerts}
             newNotification={this.state.newAlert}
             toggle={this.toggleAlertDropdown}
-            id="alerts" 
+            id="alerts"
             iconClass="fas fa-bell fa-lg" />
           <Dropdown>
             <Dropdown.Toggle className="ml-sm-5 mr-sm-5" variant="primary" id="dropdown-basic" />
             <Dropdown.Menu>
               <Dropdown.Item href="#/action-1"><i className="mr-3 fas fa-cog"></i>Settings</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item href="/" onClick={() => removeAccessToken()}><i className="mr-3 fas fa-power-off"></i>Logout</Dropdown.Item>
+              <Dropdown.Item href="javascript:;" onClick={() => this.removeAccessToken()}><i className="mr-3 fas fa-power-off"></i>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Nav>
@@ -187,4 +205,4 @@ class NavHeader extends React.Component {
   }
 }
 
-export default NavHeader;
+export default withRouter(NavHeader);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container } from "react-bootstrap";
+import { withRouter } from 'react-router-dom';
 
 import ScrollFeed from '../../shared/ScrollFeed/ScrollFeed';
 import NavHeader from '../../shared//NavHeader/NavHeader';
@@ -24,4 +25,4 @@ const styles = {
   }
 };
 
-export default FrontPage;
+export default withRouter(FrontPage);
