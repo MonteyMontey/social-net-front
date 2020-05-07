@@ -2,7 +2,9 @@ import cookie from 'react-cookies';
 import Axios from 'axios';
 
 const removeAccessToken = () => {
-  cookie.remove('token', { path: '/', domain: '.social-net.tech' });
+  //cookie.remove('token', { path: '/', domain: '.social-net.tech' });
+  Axios.get(process.env.REACT_APP_NODE_URL + '/logout', { withCredentials: true })
+    .catch()
 };
 
 // shamelessly copied (and then modified) from https://stackoverflow.com/questions/6108819/javascript-timestamp-to-relative-time-eg-2-seconds-ago-one-week-ago-etc-best
@@ -44,6 +46,6 @@ const sendLog = (log, type = "error") => {
   //  .catch();
 }
 
-const consoleLog = (process.env.NODE_ENV === 'development') ? console.log : () => {};
+const consoleLog = (process.env.NODE_ENV === 'development') ? console.log : () => { };
 
 export { removeAccessToken, timeSince, parseForNewNotifications, sendLog, consoleLog };
