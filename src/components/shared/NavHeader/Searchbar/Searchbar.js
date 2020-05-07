@@ -34,8 +34,9 @@ class Searchbar extends React.Component {
     Axios.get(process.env.REACT_APP_NODE_URL + '/users/textsearch', {
       params: {
         inputValue: inputValue
-      }
-    }, {withCredentials: true})
+      },
+      withCredentials: true
+    })
       .then(res => {
         this.setState({
           suggestions: res.data

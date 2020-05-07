@@ -15,8 +15,9 @@ class VerifyEmailPage extends React.Component {
     Axios.get(process.env.REACT_APP_NODE_URL + '/activate-account', {
       params: {
         activationCode: this.props.match.params.activationCode
-      }
-    }, { withCredentials: true })
+      },
+      withCredentials: true
+    })
       .then(_ => {
         this.setState({
           activationCodeValid: true

@@ -46,7 +46,8 @@ class ResetPasswordPage extends React.Component {
     Axios.get(process.env.REACT_APP_NODE_URL + '/reset-password', {
       params: {
         resetID: this.props.match.params.resetID
-      }
+      },
+      withCredentials: true
     })
       .then(res => {
         this.setState({
