@@ -40,8 +40,8 @@ const parseForNewNotifications = (notifications) => {
 }
 
 const sendLog = (log, type = "error") => {
-  Axios.post(process.env.REACT_APP_LOGS_URL + '/logs', { log, type }, {withCredentials: true})
-    .catch();
+  //Axios.post(process.env.REACT_APP_LOGS_URL + '/logs', { log, type }, {withCredentials: true})
+  //  .catch();
 }
 
 const consoleLog = (process.env.NODE_ENV === 'development') ? console.log : () => {};
